@@ -11,13 +11,17 @@ import { useStaticQuery, graphql } from "gatsby"
 const Bio = () => {
   const { author } = useStaticQuery(graphql`
     query BioQuery {
-      # if there was more than one user, this would need to be filtered
-      author: wpUser {
-        firstName
-        twitter: name
-        description
-        avatar {
-          url
+      allWpPost {
+        nodes {
+          author {
+            node {
+              firstName
+              lastName
+              avatar {
+                url
+              }
+            }
+          }
         }
       }
     }
@@ -36,7 +40,7 @@ const Bio = () => {
       )}
       {author?.firstName && (
         <p>
-          Written by <strong>{author.firstName}</strong>
+          Napisane przez <strong>{author.firstName}</strong>
           {` `}
           {author?.description || null}
           {` `}
