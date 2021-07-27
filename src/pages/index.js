@@ -1,6 +1,6 @@
 // Step 1: Import React
 import * as React from 'react'
-
+import Header from '../components/header'
 // Step 2: Define your component
 const IndexPage = () => {
   return (
@@ -9,6 +9,7 @@ const IndexPage = () => {
       <div className="row">
         <h1 className="title">Moto Trips</h1>
         <p>Użyj wyszukiwarki</p>
+        <Header txt="this is the"/>
       </div>
     </main>
   )
