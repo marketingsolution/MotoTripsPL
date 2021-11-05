@@ -1,71 +1,69 @@
 import React from "react"
-import { graphql, Link, StaticQuery } from "gatsby"
+import { Link } from "gatsby"
+import { NewsQuery } from "../hooks/news-query"
+import { GatsbyImage, getImage } from "gatsby-plugin-image"
 
 
 
 
-const NewsIndex = () => (
-  <StaticQuery
-  query={graphql` 
-      query News {
-        allWpNews {
-          
-              nodes {
-                id
-                title
-                lead
-                uri
-                featuredImage {
-                  node {
-                    link
-                    altText
-                    uri
-                    localFile {
-                    
-                    }
-                  }
-                }
-              }
+const NewsList = () => {
+  
+  return (
+    
+    NewsQuery().map((nodes, key) => {
+      const image = getImage(nodes.featuredImage.node.localFile)
+      
+        if(key === 0){
+          return ( 
+          <div className="row">
+            <div className="flex" >
+              <div className="featured-news">
+              <Link to={nodes.link}>
+                <GatsbyImage image={image}  className="news-img" alt={nodes.title} />
+              </Link>
+              </div>  
+              <div className="featured-news" style={{whiteSpace: `normal`}}>
+              <Link to={nodes.link}>
+                <h3>{nodes.title}</h3>
+                <p>{nodes.lead.length <= 300 ? nodes.lead : nodes.lead.slice(0, 300) + '...'}</p>
+              </Link>
+              </div>
+            </div>
+
+          </div>
+          )
+        } else{
+          return (
             
-          }
-      }
-     `
+            <div className="card" key={nodes.id}>
+
+           
+            
+            <Link to={nodes.link}>
+              <div className="featured-news">
+                <GatsbyImage image={image} alt={nodes.title} className="news-img"/>
+              </div>  
+              <p className="card-date">{nodes.date}</p>
+              
+              
+                <h3>{nodes.title.length <= 65 ? nodes.title : `${nodes.title.slice(0, 65)}...`}</h3>
+            
+            </Link>
+            
+            
+        </div>
+          )
+         
+        }
+
+           
+      
+       
+     
+    })
+  )   
+
 }
 
 
-
-  render={data => (
-    
-    <div className="row">
-    
-      <div>
-        <h3>{data.allWpNews.nodes[0].title}</h3>
-
-        <p>{data.allWpNews.nodes[0].lead}</p>
-        <a className="button" href={data.allWpNews.nodes[0].uri}>Więcej</a>
-      </div>
-
-      <div>
-        <h3>{data.allWpNews.nodes[1].title}</h3>
-        <p>{data.allWpNews.nodes[1].lead}</p>
-      </div>
-
-      <div>
-        <h3>{data.allWpNews.nodes[2].title}</h3>
-        <p>{data.allWpNews.nodes[2].lead}</p>
-      </div>
-
-      <div>
-        <h3>{data.allWpNews.nodes[3].title}</h3>
-        <p>{data.allWpNews.nodes[3].lead}</p>
-      </div>
-    
-    </div>
-    
-  )}
-  />
-  
-);
-
-export default NewsIndex
-
+export default NewsList
