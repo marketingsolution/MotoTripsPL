@@ -78,9 +78,10 @@ const Seo = ({ description, lang, meta, title }) => {
 }
 
 Seo.defaultProps = {
-  lang: `en`,
+  lang: `pl`,
   meta: [],
-  description: ``,
+  title: `Moto Trips - portal motocyklowy 🏍️ testy, opinie, trasy 🏕️`,
+  description: `Moto Trips 🌍 to portal motocyklowy w którym prezentujemy moto testy, sprzęt dla motocyklistów recenzje, opinie, a także ciekawe trasy motocyklowe. 🛣️`,
 }
 
 Seo.propTypes = {

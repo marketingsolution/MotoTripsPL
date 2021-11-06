@@ -13,6 +13,10 @@ module.exports = {
    * Gatsby has a rich ecosystem of plugins.
    * If you need any more you can search here: https://www.gatsbyjs.com/plugins/
    */
+   siteMetadata: {
+    siteUrl: `https://mototrips.pl`,
+  },
+
   plugins: [
     {
       /**
@@ -29,10 +33,13 @@ module.exports = {
         url:
           process.env.WPGRAPHQL_URL ||
           `https://moto-trips.pl/graphql`,
-          
-      },
-    },
-
+          schema: {
+            perPage: 20,
+            requestConcurrency: 5,
+            previewRequestConcurrency: 2,
+          }
+        }
+      }, 
     /**
      * We need this plugin so that it adds the "File.publicURL" to our site
      * It will allow us to access static url's for assets like PDF's
@@ -104,7 +111,7 @@ module.exports = {
 
     // See https://www.gatsbyjs.com/plugins/gatsby-plugin-react-helmet/?=gatsby-plugin-react-helmet
     `gatsby-plugin-react-helmet`,
-
+    `gatsby-plugin-offline`,
     /**
      * this (optional) plugin enables Progressive Web App + Offline functionality
      * To learn more, visit: https://gatsby.dev/offline
@@ -120,6 +127,9 @@ module.exports = {
       head: true,
       enableWebVitalsTracking: true,
       },
-    }
+    },
+   
+     `gatsby-plugin-sitemap`,
+  
   ],
 }

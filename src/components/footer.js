@@ -66,7 +66,7 @@ const Footer = () => {
                 
             
         </FooterLinks>
-        <CopyWright> Projekt i realizacja <a href="https://marketingsolutions.com.pl/">Marketing Solutions</a></CopyWright>
+        <CopyWright>© {new Date().getFullYear()}{` `} Projekt i realizacja <a href="https://marketingsolutions.com.pl/">Marketing Solutions</a></CopyWright>
     </div>  
   )
  

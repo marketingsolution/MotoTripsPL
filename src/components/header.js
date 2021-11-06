@@ -129,13 +129,13 @@ const Header = () => {
         <MenuLinks nav={nav} className="row">
                     
                 <div>
-                    <a href="https://moto-trips.pl/aktualnosci/">Aktualności</a>
+                    <a href="/aktualnosci/">Aktualności</a>
                 </div>
                 <div>
-                    <a href="https://moto-trips.pl/moto-test/">Testy</a>
+                    <a href="/moto-test/">Testy</a>
                 </div>
                 <div>
-                    <a href="https://moto-trips.pl/katalog-motocykli/">Katalog Motocykli</a>
+                    <a href="/katalog-motocykli/">Katalog Motocykli</a>
                 </div>
                 <div>
                     <a href="https://moto-trips.pl/category/trasy/">Trasy</a>

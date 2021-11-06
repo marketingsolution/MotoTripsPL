@@ -13,7 +13,7 @@ const PostList = () => {
       
      return (
         <div className="row">
-          <Link style={{textDecoration: 'none'}} to={`https://moto-trips.pl${nodes.uri}`} >
+          <Link style={{textDecoration: 'none'}} to={nodes.uri} >
           <div className="flex post-list-item">
             
                 
