@@ -23,6 +23,7 @@ export const query = graphql`
         paragraph1
         paragraph2
         gallery
+        film
         tags {
           nodes {
             name

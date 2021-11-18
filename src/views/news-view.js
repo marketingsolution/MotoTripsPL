@@ -4,6 +4,8 @@ import styled from "styled-components"
 import Breadcrumb from "../components/Breadcrumb"
 import { GatsbyImage, getImage } from "gatsby-plugin-image"
 import Seo from "../components/seo"
+import NewsPost from "../components/news-post-archive"
+import MotoTest from "../components/post-archive"
 const Lead = styled.text`
 
   font-size: 30px;
@@ -12,6 +14,12 @@ const Lead = styled.text`
   font-weight: 300;
   color: #919191;
   
+`
+const LeftColumn = styled.div`
+width: 70%;
+`
+const RightColumn = styled.div`
+width: 30%;
 `
 
 function NewsView({ news }) {
@@ -28,7 +36,7 @@ function NewsView({ news }) {
       <Breadcrumb title={news.title} path="/aktualnosci" pathName="Aktualności"/>
       <main>
 
-        <div className="row">
+        <div className="row flex">
          <GatsbyImage
           style={{
             gridArea: "1/1",
@@ -45,10 +53,21 @@ function NewsView({ news }) {
 
             {news.lead}
           </Lead>
-          <div dangerouslySetInnerHTML={{ __html: news.paragraph1 }}></div>
-          <div dangerouslySetInnerHTML={{ __html: news.paragraph2 }}></div>
+          <LeftColumn>
+              <div>
+                  <iframe width="100%" height="315" src={news.film} title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
+
+              </div>
+              <div dangerouslySetInnerHTML={{ __html: news.paragraph1 }}></div>
+              <div dangerouslySetInnerHTML={{ __html: news.paragraph2 }}></div>
+          </ LeftColumn>
+          <RightColumn>
+            <MotoTest/>
+          </RightColumn>
         </div>
-        
+        <div style={{padding: "50px 0"}} className="scrolling-wrapper">
+         <NewsPost />
+        </div>
       </main>
      
       </Layout>

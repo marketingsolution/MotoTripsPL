@@ -1,5 +1,5 @@
 import React from "react";
-import NewsList from "../../components/post-archive";
+import AllPostList from "../../components/all-post-archive";
 import Layout from '../../components/layout'
 import Breadcrumb from "../../components/Breadcrumb";
 const Aktualnosci = () => {
@@ -14,7 +14,7 @@ const Aktualnosci = () => {
         </p>
       </div>
      
-      <NewsList />
+      <AllPostList />
       <div className="row">
         <h2>Testowane motocykle</h2>
         <p>

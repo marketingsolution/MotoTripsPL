@@ -1,6 +1,6 @@
 import React from "react"
 import { Link } from "gatsby"
-import { NewsQuery } from "../hooks/news-query"
+import { NewsQuery } from "../hooks/all-news-query"
 import { GatsbyImage, getImage } from "gatsby-plugin-image"
 
 

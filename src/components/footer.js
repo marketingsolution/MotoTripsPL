@@ -1,6 +1,6 @@
 import React from "react"
 import styled from "styled-components"
-
+import { Link } from 'gatsby'
 import { StaticImage } from "gatsby-plugin-image"
 const FooterLinks = styled.nav`
 
@@ -32,7 +32,7 @@ const Footer = () => {
       
     <div>
        
-        
+        <Link to='/'>
        <StaticImage
                 className="row"
                 width={85}
@@ -41,7 +41,7 @@ const Footer = () => {
                 src="../img/logo-kontra.png"
         
             />
-            
+          </Link>  
      
         <FooterLinks className="row">
                     

@@ -8,7 +8,7 @@ import Seo from '../components/seo'
 import styled from "styled-components"
 import Layout from '../components/layout'
 import { Link } from 'gatsby'
-
+import FeaturedNews from '../components/featured-news'
 const Main = styled.main`
 transition: margin-left 300ms;
 margin-left: ${({ nav }) => (nav ? "250px" : "0")};
@@ -34,7 +34,7 @@ const IndexPage = () => {
         
       </div>
       <SectionHeader txt="News" img="https://moto-trips.pl/wp-content/uploads/2019/02/news.jpg"/>
-     
+        <FeaturedNews />
         <div className="scrolling-wrapper">
           <NewsPosts />
         </div>

@@ -73,6 +73,14 @@ module.exports = {
     {
       resolve: `gatsby-source-filesystem`,
       options: {
+        name: `news`,
+        path: `${__dirname}/src/pages/news`,
+      },
+    },
+
+    {
+      resolve: `gatsby-source-filesystem`,
+      options: {
         name: `trasy`,
         path: `${__dirname}/src/pages/trasy-motocyklowe`,
       },
@@ -129,7 +137,6 @@ module.exports = {
       },
     },
    
-     `gatsby-plugin-sitemap`,
   
   ],
 }

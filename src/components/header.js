@@ -1,8 +1,9 @@
 import React, { useState } from "react"
 import styled from "styled-components"
 import { StaticImage } from "gatsby-plugin-image"
-
-const MenuIcon = styled.button`
+import { Link } from 'gatsby'
+import { Helmet } from "react-helmet"
+const MenuIcon = styled.div`
 @media (min-width: 42rem) {
 div {
     display: none;
@@ -65,6 +66,7 @@ const MenuLinks = styled.nav`
         width: 100%;
     }
 }
+    
     display: flex;
     flex-direction: column;
     justify-content: left;
@@ -93,7 +95,7 @@ const MenuLinks = styled.nav`
     }
     a {
         text-decoration: none;
-        color: #4f5969;
+        color: #919191;
         font-size: 1rem;
         transition: color 300ms;
        
@@ -108,15 +110,30 @@ const MenuLinks = styled.nav`
 const Header = () => {
     const [nav, showNav] = useState(false)
     
+   
   return(
       
     <div>
+        <Helmet>
+                <script type="application/ld+json">
+                    {`
+                        {
+                        "@context": "https://schema.org",
+                        "@type": "Organization",
+                        "url": "https://www.mototrips.pl",
+                        "name": "Moto Trips Polska",
+                            "logo": "../img/logo-kontra.png"
+                        }
+                    `}
+                </script>
+        </Helmet>
+
         <MenuIcon nav={nav} onClick={() => showNav(!nav)} >
             <div />
             <div />
         </MenuIcon>
-        
-            <StaticImage
+        <Link to="/">
+           <StaticImage
                 className="row"
                 width={85}
                 layout="fixed"
@@ -124,8 +141,9 @@ const Header = () => {
                 src="../img/logo-kontra.png"
         
             />
-            
+            </Link>
       
+
         <MenuLinks nav={nav} className="row">
                     
                 <div>
@@ -135,10 +153,10 @@ const Header = () => {
                     <a href="/moto-test/">Testy</a>
                 </div>
                 <div>
-                    <a href="/katalog-motocykli/">Katalog Motocykli</a>
+                    <a href="https://moto-trips.pl/katalog-motocykli/">Katalog Motocykli</a>
                 </div>
                 <div>
-                    <a href="https://moto-trips.pl/category/trasy/">Trasy</a>
+                    <a href="https://moto-trips.pl/trasy-motocyklowe/">Trasy</a>
                 </div>
                 <div>
                     <a href="https://moto-trips.pl/#kontakt">Kontakt</a>

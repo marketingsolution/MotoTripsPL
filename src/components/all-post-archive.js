@@ -1,6 +1,6 @@
 import React from "react"
 import { Link } from "gatsby"
-import { PostQuery } from "../hooks/post-query"
+import { PostQuery } from "../hooks/all-post-query"
 import { GatsbyImage, getImage } from "gatsby-plugin-image"
 
 
@@ -22,7 +22,8 @@ const PostList = () => {
               </div>
               <div className="featured-news">
                   <h3>{nodes.title}</h3>
-                  <p>{`${nodes.excerpt.slice(3, 200)}...`}</p>
+                  
+                  <p dangerouslySetInnerHTML={{ __html: nodes.excerpt.slice(0, 200) }}/>
                   <div className="bio">
                     
                     <img alt={nodes.author.node.name} className="bio-avatar" src={nodes.author.node.avatar.url} />
