@@ -14,7 +14,14 @@ module.exports = {
    * If you need any more you can search here: https://www.gatsbyjs.com/plugins/
    */
    siteMetadata: {
-    siteUrl: `https://mototrips.pl`,
+     title:`Moto Trips - portal motocyklowy 🏍️ testy, opinie, trasy 🏕️`,
+     titleTemplate: "%s - Moto Trips.",
+     url: "https://mototrips.pl",
+     image: "/logo-moto-trips.PNG",
+     description:`Moto Trips 🌍 to portal motocyklowy w którym prezentujemy moto testy, sprzęt dla motocyklistów recenzje, opinie, a także ciekawe trasy motocyklowe. 🛣️`,
+     author: `Moto Trips Polska`,
+     twitterUsername: "@gasiopr",
+    
   },
 
   plugins: [
@@ -91,6 +98,13 @@ module.exports = {
       options: {
         name: `sprzet`,
         path: `${__dirname}/src/pages/sprzet`,
+      },
+    },
+    {
+      resolve: `gatsby-source-filesystem`,
+      options: {
+        name: `tag`,
+        path: `${__dirname}/src/pages/tag`,
       },
     },
 

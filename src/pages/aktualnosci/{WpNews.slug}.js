@@ -23,11 +23,20 @@ export const query = graphql`
         paragraph1
         paragraph2
         gallery
-        date(formatString: "DD.MM.YYYY r.")
+        modified
+        author {
+          node {
+            name
+          }
+        }
+        
+        date
         featuredImage {
           node {
             altText
             localFile {
+              publicURL
+              url
               childImageSharp {
                 gatsbyImageData(formats: WEBP)
               }

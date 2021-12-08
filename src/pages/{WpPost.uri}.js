@@ -1,37 +1,35 @@
 import * as React from "react";
 import { graphql } from "gatsby";
-import PostView from "../../views/MotoTest";
+import PostView from "../views/news-view";
 
 function Post(props) {
   const { allWpPost } = props.data;
   console.log(allWpPost)
-
+  
   return <PostView news={allWpPost.nodes[0]} />;
 }
 
 export default Post;
 
 export const query = graphql`
-  query($slug: String!) {
-    allWpPost(filter: { slug: { eq: $slug } }) {
+  query($uri: String!) {
+    allWpPost(filter: { uri: { eq: $uri } }) {
       nodes {
         id
         slug
         uri
         title
-        date
-        modified
-        author {
-          node {
-            name
-          }
-        }
         categories {
           nodes {
             name
           }
         }
         excerpt
+        author {
+          node {
+            name
+          }
+        }
         paragraph1
         paragraph2
         gallery
@@ -39,15 +37,17 @@ export const query = graphql`
         tags {
           nodes {
             name
-            slug
-            uri
           }
         }
+        date
+        modified
         featuredImage {
           node {
-            mediaItemUrl
+            
             altText
             localFile {
+              publicURL
+              url
               childImageSharp {
                 gatsbyImageData(
                   formats: [AUTO, WEBP, AVIF]

@@ -2,7 +2,7 @@ import React, { useState } from "react"
 import styled from "styled-components"
 import { StaticImage } from "gatsby-plugin-image"
 import { Link } from 'gatsby'
-import { Helmet } from "react-helmet"
+
 const MenuIcon = styled.div`
 @media (min-width: 42rem) {
 div {
@@ -114,19 +114,7 @@ const Header = () => {
   return(
       
     <div>
-        <Helmet>
-                <script type="application/ld+json">
-                    {`
-                        {
-                        "@context": "https://schema.org",
-                        "@type": "Organization",
-                        "url": "https://www.mototrips.pl",
-                        "name": "Moto Trips Polska",
-                            "logo": "../img/logo-kontra.png"
-                        }
-                    `}
-                </script>
-        </Helmet>
+       
 
         <MenuIcon nav={nav} onClick={() => showNav(!nav)} >
             <div />
@@ -147,10 +135,10 @@ const Header = () => {
         <MenuLinks nav={nav} className="row">
                     
                 <div>
-                    <a href="/aktualnosci/">Aktualności</a>
+                    <Link to="/aktualnosci/">Aktualności</Link>
                 </div>
                 <div>
-                    <a href="/moto-test/">Testy</a>
+                    <Link to="/moto-test/">Testy</Link>
                 </div>
                 <div>
                     <a href="https://moto-trips.pl/katalog-motocykli/">Katalog Motocykli</a>
@@ -159,7 +147,7 @@ const Header = () => {
                     <a href="https://moto-trips.pl/trasy-motocyklowe/">Trasy</a>
                 </div>
                 <div>
-                    <a href="https://moto-trips.pl/#kontakt">Kontakt</a>
+                    <a href="https://moto-trips.pl/kontakt">Kontakt</a>
                 </div>
                 
             

@@ -7,7 +7,7 @@ export const PostQuery = () => {
           allWpPost(
             filter: {categories: {nodes: {elemMatch: {name: {eq: "Sprzęt"}}}}}
             sort: {fields: [date], order: DESC}
-            limit: 6
+            limit: 3
             ) {
               nodes {
                 title

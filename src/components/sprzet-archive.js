@@ -1,6 +1,7 @@
 import React from "react"
 import { PostQuery } from "../hooks/sprzet-query"
 import { GatsbyImage, getImage } from "gatsby-plugin-image"
+import { Link } from "gatsby"
 const SprzetList = () => {
 
   return (
@@ -12,7 +13,7 @@ const SprzetList = () => {
 
            
             
-        <a href={`https://moto-trips.pl${nodes.uri}`}>
+        <Link to={nodes.uri}>
         
           <GatsbyImage image={image} alt={nodes.title} className="news-img"/>
           <p className="card-date">{nodes.date}</p>
@@ -20,7 +21,7 @@ const SprzetList = () => {
           
             <h3>{nodes.title.length <= 65 ? nodes.title : `${nodes.title.slice(0, 65)}...`}</h3>
         
-        </a>
+        </Link>
         
         
     </div>

@@ -1,34 +1,94 @@
-import * as React from "react"
+import React from "react"
 import Layout from "../components/layout"
 import styled from "styled-components"
 import Breadcrumb from "../components/Breadcrumb"
 import { GatsbyImage, getImage } from "gatsby-plugin-image"
 import Seo from "../components/seo"
 import NewsPost from "../components/news-post-archive"
-const Lead = styled.text`
+import MotoTest from "../components/recomendetMotoTest"
+import { Link } from "gatsby"
 
-font-size: 30px;
+const Lead = styled.div`
+p {
+  font-size: 25px;
+}
+font-size: 25px;
 font-family: Lato;
 font-style: italic;
 font-weight: 300;
 color: #919191;
+padding-bottom: 25px;
+`
+const LeftColumn = styled.div`
+@media (min-width: 1025px) {
+  width: 70%;
+  padding: 0 25px;
+  p{
+    color: #919191;
+  }
+  ul{
+    color: #919191;
+    padding: 10px 50px;
+ }
+}
+width: 95%;
+margin: 0 auto;
+p{
+  color: #919191;
+}
+ul, ol{
+  color: #919191;
+   padding: 5px 0 5px 5%;
+}
+table{
+  color: #919191;
+}
+`
+const RightColumn = styled.div`
+@media (min-width: 1025px) {
+  width: 30%;
+  display: block;
+  padding-top: 100vh;
+}
+display: none;
+`
+const Tags = styled.div`
+display: inline-block;
+border: 1px solid #e9b000;
+border-radius: 25px;
+width: auto;
+color: #919191; 
+padding: 7px 17px;
+margin: 20px; 
+font-size: 14px;
+transition: background-color .6s ease-in, box-shadow .3s ease-out;
+:hover{
+  color: #E9b000;
+  background-color: #fff;
+  box-shadow: 0px 0px 10px 2px #EB9000;
+}
 `
 
 function NewsView({ news }) {
-  console.log(news.tags)
+ 
+  console.log(news.tags.nodes.slug)
   const image = getImage(news.featuredImage.node.localFile.childImageSharp)
   return (
     
     <Layout>
        <Seo
         title={news.title}
-        description={news.lead}
-        image={image}
+        description={news.excerpt.slice(3, 135)} 
+        image={news.featuredImage.node.localFile.url}
         pathname={news.slug}
+        article
+        date={news.date}
+        modified={news.modified}
+        author={news.author.node.name}
       />
-      <Breadcrumb title={news.title} path="/moto-test" pathName="Moto Test" />
-
-
+      
+     
+  
 
       <div style={{ display: "grid" }}>
       {/* You can use a GatsbyImage component if the image is dynamic */}
@@ -63,28 +123,36 @@ function NewsView({ news }) {
         <h1>{news.title}</h1>
       </div>
     </div>
+    <Breadcrumb title={news.title} path="/moto-test" pathName="Moto Test" />
 
 
 
       
-      <main> <div className="row">
-     
+      <main> <div className="row flex">
+      <LeftColumn>
         <Lead dangerouslySetInnerHTML={{ __html: news.excerpt }}/>
-        <div>
 
-          <iframe width="100%" height="315" src={news.film} title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
-        
-        </div>
+       
+        <div  className={news.film === "" ? `hidden` : ``}>
+                  <iframe width="100%" height="315" src={news.film} title="YouTube video player" frameBorder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowFullScreen></iframe>
+
+              </div>
         <div dangerouslySetInnerHTML={{ __html: news.paragraph1 }}></div>
-        
-        
         
         <div dangerouslySetInnerHTML={{ __html: news.paragraph2 }}></div>
       
-        {news.tags.nodes.map(tag => <p key={tag.id}>{tag.name}</p>)}
-
+        {news.tags.nodes.map(tag => 
+        <Link to={tag.uri}>
+          <Tags key={tag.id}>{tag.name}</Tags>
+        </Link>  )}
         
         
+        </ LeftColumn>
+        <RightColumn>
+          
+            <MotoTest/>
+          
+          </RightColumn>
         </div>
         <div style={{padding: "50px 0"}} className="scrolling-wrapper">
          <NewsPost />

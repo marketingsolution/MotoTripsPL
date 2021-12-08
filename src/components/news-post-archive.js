@@ -13,9 +13,7 @@ const NewsList = () => {
     NewsQuery().map((nodes, key) => {
       const image = getImage(nodes.featuredImage.node.localFile)
       
-        if(key === 0){
-          return 
-        } else{
+        
           return (
             
             <div className="card" key={nodes.id}>
@@ -43,7 +41,7 @@ const NewsList = () => {
       
        
      
-    })
+    )
   )   
 
 }

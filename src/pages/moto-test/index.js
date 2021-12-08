@@ -2,11 +2,42 @@ import React from "react";
 import AllPostList from "../../components/all-post-archive";
 import Layout from '../../components/layout'
 import Breadcrumb from "../../components/Breadcrumb";
+import Seo from "../../components/seo";
+import { Helmet } from "react-helmet";
+
 const Aktualnosci = () => {
   return (
     <Layout>
       <Breadcrumb title="Testy Motocykli"/>
-
+      <Helmet >
+      <script type='application/ld+json'>
+        {`
+          {
+            "@context": "https://schema.org",
+            "@type": "BreadcrumbList",
+            "itemListElement": [{
+              "@type": "ListItem",
+              "position": 1,
+              "name": "Start",
+              "item": "https://mototrips.pl/"
+            },{
+              "@type": "ListItem",
+              "position": 2,
+              "name": "Testy motocykli"
+            }]
+      
+          }
+          
+          
+          `}
+        </script>
+      </Helmet>
+      <Seo
+        title="Testy motocykli, Moto Trips, portal z testami motocykowymi"
+        description="Niezależny portal motocyklowy, rzetelne testy motocykli nie tylko"
+        image="https://moto-trips.pl/wp-content/uploads/2020/06/2020_YAM_XTZ700SP_EU_SYB_ACT_005_03-77128-min.jpg"
+        pathname="/moto-test/"
+      />
       <div className="row">
         <p>Zapraszam do strony z naszymi moto testami, warto tu zajrzeć, żeby pomóc sobie wyrobić zdanie na temat wybranych motocykli. Znajdziesz tu przegląd różnych modeli i marek, głównie jednak związanych z szeroko pojętą turystyką motocyklową. Testuję motocykle przez pryzmat ich przydatności do jazdy w trasie i lekko trudnym terenie.
 

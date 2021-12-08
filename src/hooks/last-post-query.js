@@ -1,21 +1,21 @@
 import { useStaticQuery, graphql } from "gatsby";
 
-export const OldNewsQuery = () => {
+export const PostQuery = () => {
     const { allWpPost } = useStaticQuery(
         graphql`
-        query OldNewsQuery {
+        query LastPost {
           allWpPost(
-            filter: {date: {gte: "2021-11-01"}, categories: {nodes: {elemMatch: {name: {eq: "News"}}}}}
-            skip: 1
+            
+            filter: {categories: {nodes: {elemMatch: {name: {ne: "Moto test"}}}}}
             sort: {fields: [date], order: DESC}
-           
+            limit: 1
             ) {
               nodes {
                 title
                 slug
                 uri
                 id
-                date(formatString: "DD. MM. YYYY r.")
+                date(formatString: "MMMM DD, YYYY")
                 excerpt
                 categories {
                   nodes {

@@ -9,6 +9,10 @@ import styled from "styled-components"
 import Layout from '../components/layout'
 import { Link } from 'gatsby'
 import FeaturedNews from '../components/featured-news'
+import OldNews from '../components/old-news-archive'
+
+
+
 const Main = styled.main`
 transition: margin-left 300ms;
 margin-left: ${({ nav }) => (nav ? "250px" : "0")};
@@ -36,6 +40,7 @@ const IndexPage = () => {
       <SectionHeader txt="News" img="https://moto-trips.pl/wp-content/uploads/2019/02/news.jpg"/>
         <FeaturedNews />
         <div className="scrolling-wrapper">
+          <OldNews />
           <NewsPosts />
         </div>
       <SectionHeader txt="Moto Test" img="https://moto-trips.pl/wp-content/uploads/2020/06/2020_YAM_XTZ700SP_EU_SYB_ACT_005_03-77128-min.jpg"/>
@@ -51,6 +56,8 @@ const IndexPage = () => {
         <SprzetPosts />
       
       </div>
+     
+
       </ Layout>
     </Main>
     </div>
