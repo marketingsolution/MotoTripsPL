@@ -90,9 +90,8 @@
 ::-webkit-scrollbar {
   background-color: #E9B000;
   height: 6px;
-  width: 5px;
-  border-radius: 100px 100px 100px 100px;
-  cursor: pointer;
+  width: 10px;
+    cursor: pointer;
  
 }
 ::-webkit-scrollbar-thumb{

@@ -123,7 +123,7 @@ const Header = () => {
         <Link to="/">
            <StaticImage
                 className="row"
-                width={85}
+                width={120}
                 layout="fixed"
                 alt="Logo Moto Trips"
                 src="../img/logo-kontra.png"

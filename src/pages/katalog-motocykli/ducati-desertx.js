@@ -2,11 +2,11 @@ import React from "react";
 
 import Layout from '../../components/layout'
 import Breadcrumb from '../../components/Breadcrumb'
-import { GatsbyImage, getImage } from "gatsby-plugin-image"
+
 import { StaticImage } from "gatsby-plugin-image"
-import { Link } from "gatsby";
+
 import Seo from "../../components/seo";
-import CatalogList from "../../components/catalog/listing"
+
 
 
 class Single extends React.Component {
