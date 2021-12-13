@@ -1,0 +1,10 @@
+### H88_WAF_START - Do not remove this line, WAF plugin will automatically update it
+php_value auto_prepend_file /var/www/html/waf/waf.php
+### H88_WAF_STOP
+RewriteEngine On
+RewriteCond %{HTTPS} !=on
+RewriteRule ^ https://%{HTTP_HOST}%{REQUEST_URI} [L,R=301]
+RewriteEngine On
+RewriteBase /
+RewriteCond %{HTTP_HOST} ^www\.(.*)$ [NC]
+RewriteRule ^(.*)$ https://%1/$1 [R=301,L]
