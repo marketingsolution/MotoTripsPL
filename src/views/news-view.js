@@ -124,7 +124,7 @@ function NewsView({ news }) {
               </div>
            
               <div dangerouslySetInnerHTML={{ __html: news.paragraph1 }}></div>
-              <div>{news.gallery}</div>
+              
               <div dangerouslySetInnerHTML={{ __html: news.paragraph2 }}></div>
           </ LeftColumn>
           <RightColumn>
