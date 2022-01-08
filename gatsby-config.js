@@ -178,6 +178,6 @@ module.exports = {
         enableWebVitalsTracking: true,
       },
     },
-  
+    
   ],
 }

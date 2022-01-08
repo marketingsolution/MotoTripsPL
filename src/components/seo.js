@@ -11,10 +11,10 @@ import { Helmet } from "react-helmet"
 import { useLocation } from "@reach/router"
 import { useStaticQuery, graphql } from "gatsby"
 
-const SEO = ({ title, description, image, article }) => {
+const SEO = ({ title, description, image, article, author, date, modified, publisher, url, tag, body }) => {
   const { pathname } = useLocation()
   const { site } = useStaticQuery(query)
-
+ 
   const {
     defaultTitle,
     titleTemplate,
@@ -23,10 +23,9 @@ const SEO = ({ title, description, image, article }) => {
     defaultImage,
     twitterUsername,
     siteLanguage,
-    author,
     headline,
-    defaultModified,
-    defaultDate,
+    defaultPublisher
+  
     
   } = site.siteMetadata
 
@@ -35,8 +34,7 @@ const SEO = ({ title, description, image, article }) => {
     description: description || defaultDescription,
     image: image || defaultImage,
     siteUrl: `${siteUrl}${pathname}`,
-    date: defaultDate,
-    modified: defaultModified,
+    publisher: defaultPublisher,  
   }
 
   const schemaOrgWebPage = {
@@ -49,24 +47,24 @@ const SEO = ({ title, description, image, article }) => {
     description: defaultDescription,
     name: defaultTitle,
     author: {
-      '@type': 'Organization',
-      name: author,
+      '@type': 'Person',
+      name: `${seo.author}`,
     },
     copyrightHolder: {
       '@type': 'Organization',
-      name: author,
+      name: defaultPublisher,
     },
     copyrightYear: `${new Date().getFullYear()}`,
     creator: {
       '@type': 'Person',
-      name: author,
+      name: `${seo.author}`,
     },
     publisher: {
-      '@type': 'Person',
-      name: author,
+      '@type': 'Organization',
+      name: defaultPublisher,
     },
-    datePublished: defaultDate,
-    dateModified: defaultModified,
+    datePublished: {date},
+    dateModified: {modified},
     image: {
       '@type': 'ImageObject',
       url: `${seo.image}`,
@@ -93,37 +91,40 @@ if (article) {
     '@type': 'Article',
     author: {
       '@type': 'Person',
-      name: author,
+      name: {author},
+      url: "https://moto-trips.pl/kontakt",
     },
     copyrightHolder: {
       '@type': 'Organization',
-      name: "Moto Trips Polska",
+      name: publisher,
     },
     copyrightYear: `${new Date().getFullYear()}`,
     creator: {
       '@type': 'Person',
-      name: author,
+      name: {author},
     },
     publisher: {
       '@type': 'Organization',
-      name: author,
+      name: publisher,
       logo: {
         '@type': 'ImageObject',
         url: 'https://mototrips.pl/static/3a318c3fbc235dfdb4453010eac8efc8/8f0cc/logo-kontra.webp',
       },
     },
-    datePublished: defaultDate,
-    dateModified: defaultModified,
-    description: seo.description,
-    headline: seo.title,
-    inLanguage: siteLanguage,
-    url: seo.url,
-    name: seo.title,
+    datePublished: {date},
+    dateModified: {modified},
+    description: {description},
+    headline: {title},
+    inLanguage: "pl-PL",
+    url: `${siteUrl}${url}`,
+    name: {title},
     image: {
       '@type': 'ImageObject',
       url: seo.image,
     },
-    mainEntityOfPage: seo.url,
+    mainEntityOfPage: `${siteUrl}${url}`,
+    keywords: {tag},
+    articleBody: {body}
   }
   // Push current blogpost into breadcrumb list
   itemListElement.push({
@@ -146,7 +147,7 @@ const breadcrumb = {
 
   return (
     <Helmet title={seo.title} titleTemplate={titleTemplate}>
-      <html lang={siteLanguage} />
+      <html lang="pl-PL" />
       <meta name="description" content={seo.description} />
       <meta name="image" content={seo.image} />
 
@@ -181,22 +182,24 @@ const breadcrumb = {
 
 export default SEO
 
+
 SEO.propTypes = {
   title: PropTypes.string,
   description: PropTypes.string,
   image: PropTypes.string,
   article: PropTypes.bool,
-  date: PropTypes.string,
+  author: PropTypes.string,
   modified: PropTypes.string,
   pathname: PropTypes.string,
+  url: PropTypes.string
 }
 SEO.defaultProps = {
   title: `Moto Trips - portal motocyklowy 🏍️ testy, opinie, trasy 🏕️`,
   description: `Moto Trips 🌍 to portal motocyklowy w którym prezentujemy moto testy, sprzęt dla motocyklistów recenzje, opinie, a także ciekawe trasy motocyklowe. 🛣️`,
   image: "/logo-moto-trips.PNG",
   article: false,
-  date: null,
-  modified: null,
+  siteLanguage: "pl-PL",
+  publisher: "Moto Trips Polska"
 }
 
 const query = graphql`
@@ -210,6 +213,7 @@ const query = graphql`
         defaultImage: image
         twitterUsername
         author
+       
       }
     }
   }

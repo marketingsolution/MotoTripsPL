@@ -6,6 +6,7 @@ import { GatsbyImage, getImage } from "gatsby-plugin-image"
 import Seo from "../components/seo"
 import NewsPost from "../components/news-post-archive"
 import MotoTest from "../components/recomendetMotoTest"
+import parse from "html-react-parser"
 
 
 const Lead = styled.div`
@@ -56,22 +57,39 @@ display: none;
 
 function NewsView({ news }) {
   const image = getImage(news.featuredImage.node.localFile.childImageSharp)
-  console.log(news.gallery)
+
+  const body = parse(news.paragraph1)
+ console.log(news.author.node.name)
   return (
     
     <Layout>
       <Seo
+        article
         title={news.title}
-        description={news.excerpt} 
+        description={news.excerpt.slice(3, 135)} 
         image={news.featuredImage.node.localFile.url}
         pathname={news.slug}
-        article
+        url={news.uri}
         date={news.date}
         modified={news.modified}
         author={news.author.node.name}
+        body={news.paragraph1}
+        
       />
       
-      
+      {/* <SchemaArticle
+      description={news.lead} 
+      authorName= {news.author.node.name}
+      copyrightHolder="Moto Trips Polska"
+      copyrightYear={new Date().getFullYear()}
+      date={news.date}
+      dateModified={news.modified}
+      headline={news.title}
+      url={"https://mototrips.pl" + news.uri}
+      keywords={news.tags}
+      body= {news.paragraph1}
+      image={image}
+      />*/}
      
       <main>
       <div style={{ display: "grid" }}>
@@ -114,7 +132,7 @@ function NewsView({ news }) {
        
           <Lead>
             
-            <div dangerouslySetInnerHTML={{ __html: news.excerpt }}></div>
+            
             {news.lead}
           </Lead>
           
@@ -123,8 +141,10 @@ function NewsView({ news }) {
 
               </div>
            
-              <div dangerouslySetInnerHTML={{ __html: news.paragraph1 }}></div>
-              
+              <div  dangerouslySetInnerHTML={{ __html: news.paragraph1 }}></div>
+
+              <div className="gallery-items" dangerouslySetInnerHTML={{ __html: news.gallery}}></div>
+
               <div dangerouslySetInnerHTML={{ __html: news.paragraph2 }}></div>
           </ LeftColumn>
           <RightColumn>

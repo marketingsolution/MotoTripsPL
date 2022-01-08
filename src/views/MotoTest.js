@@ -7,6 +7,7 @@ import Seo from "../components/seo"
 import NewsPost from "../components/news-post-archive"
 import MotoTest from "../components/recomendetMotoTest"
 import { Link } from "gatsby"
+import parse from "html-react-parser"
 
 const Lead = styled.div`
 p {
@@ -70,24 +71,32 @@ transition: background-color .6s ease-in, box-shadow .3s ease-out;
 `
 
 function NewsView({ news }) {
- console.log("tu powinna być galeria")
+ 
   console.log(news.gallery)
+  console.log(news.title)
   const image = getImage(news.featuredImage.node.localFile.childImageSharp)
+  const datePublished = news.date
   return (
     
     <Layout>
-       <Seo
+      
+     
+    
+      <Seo
+        article
         title={news.title}
         description={news.excerpt.slice(3, 135)} 
         image={news.featuredImage.node.localFile.url}
         pathname={news.slug}
-        article
+        url={news.uri}
         date={news.date}
         modified={news.modified}
         author={news.author.node.name}
+        body={news.paragraph1}
+        tag={news.tags.nodes.map(tag =>tag.name)}
       />
       
-     
+ 
   
 
       <div style={{ display: "grid" }}>
@@ -106,6 +115,7 @@ function NewsView({ news }) {
         alt={news.featuredImage.node.altText} 
         // Assisi, Perúgia, Itália by Bernardo Ferrari, via Unsplash
         image={image}
+        id="FeaturedImage"
         formats={["auto", "webp", "avif"]}
       />
       <div className="layer"
@@ -137,9 +147,9 @@ function NewsView({ news }) {
                   <iframe width="100%" height="315" src={news.film} title="YouTube video player" frameBorder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowFullScreen></iframe>
 
               </div>
-        <div dangerouslySetInnerHTML={{ __html: news.paragraph1 }}></div>
-        <div>{news.gallery}</div>
-        <div dangerouslySetInnerHTML={{ __html: news.paragraph2 }}></div>
+        <div>{parse(news.paragraph1)}</div>
+        <div className="gallery-items" dangerouslySetInnerHTML={{ __html: news.gallery}}></div>
+        <div>{parse(news.paragraph2)}</div>
       
         {news.tags.nodes.map(tag => 
         <Link to={tag.uri}>
@@ -158,7 +168,7 @@ function NewsView({ news }) {
          <NewsPost />
         </div>
       </main>
-     
+    
     </Layout>
      
   )

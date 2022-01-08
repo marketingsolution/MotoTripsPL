@@ -19,6 +19,7 @@ export const query = graphql`
         uri
         title
         lead
+        excerpt
         film
         paragraph1
         paragraph2

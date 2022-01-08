@@ -32,7 +32,7 @@ function TagsView({ tag }) {
         description={"Jesteś na stronie Moto Trips i zebraliśmy w tym miejscu wszystkie posty tematycznie powiązane z" + " " + tag.name}
         
         pathname={tag.slug}
-        
+        url={tag.uri}
         
      
       />
