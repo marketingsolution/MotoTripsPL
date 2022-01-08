@@ -5,7 +5,7 @@ class YouTube extends component{
         super(propos);
         this.state = {};
     }
-    const apiKey='AIzaSyCCjwwAfDPpwDgv3IJIyx8qMDEzKp2BRlk'
+    const apiKey='API KEY'
 
     componentDidMount() {
         fetch(
