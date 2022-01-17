@@ -47,6 +47,7 @@ module.exports = {
             perPage: 20,
             requestConcurrency: 5,
             previewRequestConcurrency: 2,
+            timeout:100000,
           }
         }
       }, 
