@@ -1,31 +1,71 @@
+import { graphql, StaticQuery } from "gatsby"
 import React from "react"
+import { Helmet } from "react-helmet"
 
-class YouTube extends component{
-    constructor(propos) {
-        super(propos);
-        this.state = {};
-    }
-    const apiKey='API KEY'
-
-    componentDidMount() {
-        fetch(
-            `https://www.googleapis.com/youtube/v3/videos?id=${id}&key=${apiKey}`
-        )
-        .then((res) => res.json())
-        .then((data) => {
-            this.setState({ videos: data});
-        })
-        .catch(console.log);
-    }
-    render(){
-        if (this.state.videos) {
-            return { videos: data}
-        } else {
-            return null
+export default function YouTube() {
+  return (
+    <StaticQuery
+      query={graphql`
+        {
+          youtube {
+            schema {
+              publishedAt
+              channelId
+              title
+              description
+              channelTitle
+              categoryId
+              liveBroadcastContent
+              defaultAudioLanguage
+              thumbnails {
+                default {
+                  height
+                  url
+                  width
+                }
+                high {
+                  height
+                  url
+                  width
+                }
+                maxres {
+                  height
+                  url
+                  width
+                }
+                medium {
+                  height
+                  url
+                  width
+                }
+                standard {
+                  height
+                  url
+                  width
+                }
+              }
+              tags
+              localized {
+                description
+                title
+              }
+            }
+          }
         }
-    }
+      `}
+      render={data =>
+        data.youtube.schema && (
+          <Helmet>
+            <script type="ld+json">
+              {JSON.stringify({
+                "@context": "https://schema.org",
+                "@type": "VideoObject",
+                ...data.youtube.schema,
+              })}
+            </script>
+          </Helmet>
+        )
+      }
+    />
+  )
 }
-
-
-
-export default YouTube
