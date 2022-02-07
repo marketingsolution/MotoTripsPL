@@ -7,19 +7,45 @@ exports.sourceNodes = async ({
   actions: { createNode },
   createContentDigest,
 }) => {
-  const result = await fetch(
-    `https://www.googleapis.com/youtube/v3/videos?part=snippet&id=${VIDEO_ID}&key=${API_KEY}`
+  const videoIds = VIDEO_ID.split(",")
+  const result = await Promise.all(
+    videoIds.map(async videoId => {
+      const response = await fetch(
+        `https://www.googleapis.com/youtube/v3/videos?part=snippet&id=${videoId}&key=${API_KEY}`
+      )
+      const data = await response.json()
+      const {
+        title,
+        thumbnails,
+        publishedAt,
+        name,
+        thumbnailUrl,
+        uploadDate,
+      } = data.items[0].snippet
+      const schema = { id: data.items[0].id, ...data.items[0].snippet }
+
+      if (!name && title) schema.name = title
+      if (!uploadDate && publishedAt) schema.uploadDate = publishedAt
+      if (
+        !thumbnailUrl &&
+        typeof thumbnails === "object" &&
+        thumbnails.default &&
+        thumbnails.default.url
+      )
+        schema.thumbnailUrl = thumbnails.default.url
+
+      return schema
+    })
   )
-  const resultData = await result.json()
 
   createNode({
     id: `youtube-video-schema`,
-    schema: resultData.items[0].snippet,
+    schema: result,
     parent: null,
     children: [],
     internal: {
       type: `Youtube`,
-      contentDigest: createContentDigest(resultData),
+      contentDigest: createContentDigest(result),
     },
   })
 }

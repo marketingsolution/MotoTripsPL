@@ -6,7 +6,7 @@ import { GatsbyImage, getImage } from "gatsby-plugin-image"
 import Seo from "../components/seo"
 import NewsPost from "../components/news-post-archive"
 import MotoTest from "../components/recomendetMotoTest"
-import YouTube from "../components/youtube/youtube"
+import YouTube from "../components/youtube"
 
 import { Link } from "gatsby"
 import parse from "html-react-parser"
@@ -80,7 +80,6 @@ function NewsView({ news }) {
   const datePublished = news.date
   return (
     <Layout>
-      <YouTube />
       <Seo
         article
         title={news.title}
@@ -137,17 +136,8 @@ function NewsView({ news }) {
           <LeftColumn>
             <Lead dangerouslySetInnerHTML={{ __html: news.excerpt }} />
 
-            <div className={news.film === "" ? `hidden` : ``}>
-              <iframe
-                width="100%"
-                height="315"
-                src={news.film}
-                title="YouTube video player"
-                frameBorder="0"
-                allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
-                allowFullScreen
-              ></iframe>
-            </div>
+            {news.film && <YouTube src={news.film} />}
+
             <div>{parse(news.paragraph1)}</div>
             <div
               className="gallery-items"
