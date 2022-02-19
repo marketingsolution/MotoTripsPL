@@ -2,6 +2,7 @@ const fetch = require(`node-fetch`)
 
 const API_KEY = process.env.YOUTUBE_DATA_API_V3_API_KEY
 const CHANNEL_IDS = process.env.YOUTUBE_CHANNEL_IDS
+const REGIONS_ALLOWED = process.env.REGIONS_ALLOWED
 
 const getChannelInfo = async ({
   channelId,
@@ -29,14 +30,14 @@ const getVideoSchema = ({ kind, videoId }) => {
   if (kind === "youtube#video")
     return new Promise((resolve, reject) => {
       fetch(
-        `https://www.googleapis.com/youtube/v3/videos?part=snippet&id=${videoId}&key=${API_KEY}`
+        `https://www.googleapis.com/youtube/v3/videos?part=snippet,statistics&id=${videoId}&key=${API_KEY}`
       )
         .then(response => {
           response
             .json()
             .then(videoData => {
               const { items } = videoData
-              const { snippet } = items[0]
+              const { snippet, statistics } = items[0]
               const {
                 title,
                 thumbnails,
@@ -45,7 +46,14 @@ const getVideoSchema = ({ kind, videoId }) => {
                 thumbnailUrl,
                 uploadDate,
               } = snippet
-              const schema = { id: videoId, ...snippet }
+              const { viewCount } = statistics
+              const schema = {
+                id: videoId,
+                ...snippet,
+                viewCount,
+              }
+
+              if (REGIONS_ALLOWED) schema.regionsAllowed = REGIONS_ALLOWED
 
               if (!name && title) schema.name = title
               if (!uploadDate && publishedAt) schema.uploadDate = publishedAt
