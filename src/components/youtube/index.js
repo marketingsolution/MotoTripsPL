@@ -36,6 +36,9 @@ export default function YouTube({ src }) {
                 categoryId
                 liveBroadcastContent
                 defaultAudioLanguage
+                interactionStatistic {
+                  userInteractionCount
+                }
                 thumbnails {
                   default {
                     height
@@ -69,6 +72,7 @@ export default function YouTube({ src }) {
                   description
                   title
                 }
+                
               }
             }
           }
