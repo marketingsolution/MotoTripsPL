@@ -179,5 +179,6 @@ module.exports = {
         enableWebVitalsTracking: true,
       },
     },
+    "gatsby-plugin-mdx",
   ],
 }

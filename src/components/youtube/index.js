@@ -36,9 +36,6 @@ export default function YouTube({ src }) {
                 categoryId
                 liveBroadcastContent
                 defaultAudioLanguage
-                interactionStatistic {
-                  userInteractionCount
-                }
                 thumbnails {
                   default {
                     height
@@ -72,7 +69,6 @@ export default function YouTube({ src }) {
                   description
                   title
                 }
-                
               }
             }
           }
@@ -81,7 +77,6 @@ export default function YouTube({ src }) {
           const schema =
             Array.isArray(data.youtube.schema) &&
             data.youtube.schema.find(schema => schema.id === videoId)
-          const { id, viewCount, ...rest } = schema
 
           return (
             schema && (
@@ -90,14 +85,8 @@ export default function YouTube({ src }) {
                   {JSON.stringify({
                     "@context": "https://schema.org",
                     "@type": "VideoObject",
-                    contentUrl: `https://www.youtube.com/watch?v=${videoId}`,
                     embedUrl: src,
-                    ...rest,
-                    interactionStatistic: {
-                      "@type": "InteractionCounter",
-                      interactionType: { "@type": "WatchAction" },
-                      userInteractionCount: viewCount,
-                    },
+                    ...schema,
                   })}
                 </script>
               </Helmet>
