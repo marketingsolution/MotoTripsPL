@@ -69,6 +69,8 @@ export default function YouTube({ src }) {
                   description
                   title
                 }
+                viewCount
+                regionsAllowed
               }
             }
           }
