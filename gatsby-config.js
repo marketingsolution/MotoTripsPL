@@ -6,6 +6,10 @@
  *
  */
 
+require("dotenv").config({
+  path: `.env.${process.env.NODE_ENV}`,
+})
+
 module.exports = {
   /**
    * Adding plugins to this array adds them to your Gatsby site.
@@ -13,19 +17,16 @@ module.exports = {
    * Gatsby has a rich ecosystem of plugins.
    * If you need any more you can search here: https://www.gatsbyjs.com/plugins/
    */
-   siteMetadata: {
-     title:`Moto Trips - portal motocyklowy 🏍️ testy, opinie, trasy 🏕️`,
-     titleTemplate: "%s - Moto Trips.",
-     siteUrl: "https://mototrips.pl",
-     image: "/logo-moto-trips.PNG",
-     description:`Moto Trips 🌍 to portal motocyklowy w którym prezentujemy moto testy, sprzęt dla motocyklistów recenzje, opinie, a także ciekawe trasy motocyklowe. 🛣️`,
-     author: `Moto Trips Polska`,
-     twitterUsername: "@gasiopr",
-    
+  siteMetadata: {
+    title: `Moto Trips - portal motocyklowy 🏍️ testy, opinie, trasy 🏕️`,
+    titleTemplate: "%s - Moto Trips.",
+    siteUrl: "https://mototrips.pl",
+    image: "/logo-moto-trips.PNG",
+    description: `Moto Trips 🌍 to portal motocyklowy w którym prezentujemy moto testy, sprzęt dla motocyklistów recenzje, opinie, a także ciekawe trasy motocyklowe. 🛣️`,
+    author: `Moto Trips Polska`,
+    twitterUsername: "@gasiopr",
   },
-  flags: {
-    PARALLEL_QUERY_RUNNING: true
-  },
+
 
   plugins: [
     {
@@ -40,17 +41,19 @@ module.exports = {
       resolve: `gatsby-source-wordpress`,
       options: {
         // the only required plugin option for WordPress is the GraphQL url.
-        url:
-          process.env.WPGRAPHQL_URL ||
-          `https://moto-trips.pl/graphql`,
-          schema: {
-            perPage: 20,
-            requestConcurrency: 5,
-            previewRequestConcurrency: 2,
-          }
-        }
-      }, 
-     `gatsby-plugin-sitemap`,
+        url: process.env.WPGRAPHQL_URL || `https://moto-trips.pl/graphql`,
+        schema: {
+          perPage: 20,
+          requestConcurrency: 5,
+          previewRequestConcurrency: 2,
+          timeout: 100000,
+        },
+        production: {
+          hardCacheMediaFiles: true,
+        },
+      },
+    },
+    `gatsby-plugin-sitemap`,
     /**
      * We need this plugin so that it adds the "File.publicURL" to our site
      * It will allow us to access static url's for assets like PDF's
@@ -133,10 +136,9 @@ module.exports = {
         defaults: {},
         // Set to false to allow builds to continue on image errors
         failOnError: false,
-             
       },
     },
-  
+
     {
       // See https://www.gatsbyjs.com/plugins/gatsby-plugin-manifest/?=gatsby-plugin-manifest
       resolve: `gatsby-plugin-manifest`,
@@ -163,21 +165,20 @@ module.exports = {
     {
       resolve: `gatsby-plugin-google-analytics`,
       options: {
-      // The property ID; the tracking code won't be generated without it
-      trackingId: "UA-114936908-1",
-      // Defines where to place the tracking script - `true` in the head and `false` in the body
-      head: true,
-      enableWebVitalsTracking: true,
+        // The property ID; the tracking code won't be generated without it
+        trackingId: "UA-114936908-1",
+        // Defines where to place the tracking script - `true` in the head and `false` in the body
+        head: true,
+        enableWebVitalsTracking: true,
       },
     },
     {
       resolve: "gatsby-plugin-google-tagmanager",
       options: {
         id: "GTM-T3Z5ZR7",
-        includeInDevelopment: true, 
+        includeInDevelopment: true,
         enableWebVitalsTracking: true,
       },
     },
-    
   ],
 }
