@@ -48,6 +48,9 @@ module.exports = {
           previewRequestConcurrency: 2,
           timeout: 100000,
         },
+        production: {
+          hardCacheMediaFiles: true,
+        },
       },
     },
     `gatsby-plugin-sitemap`,
