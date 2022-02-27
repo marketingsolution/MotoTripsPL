@@ -21,7 +21,9 @@ const getChannelInfo = async ({
     }${part ? `&part=${part}` : ""}`
   )
 
-  return response.json()
+  if (response.status === 200) return await response.json()
+
+  throw await response.json()
 }
 
 const getVideoSchema = ({ kind, videoId }) => {
@@ -33,41 +35,43 @@ const getVideoSchema = ({ kind, videoId }) => {
         `https://www.googleapis.com/youtube/v3/videos?part=snippet,statistics&id=${videoId}&key=${API_KEY}`
       )
         .then(response => {
-          response
-            .json()
-            .then(videoData => {
-              const { items } = videoData
-              const { snippet, statistics } = items[0]
-              const {
-                title,
-                thumbnails,
-                publishedAt,
-                name,
-                thumbnailUrl,
-                uploadDate,
-              } = snippet
-              const { viewCount } = statistics
-              const schema = {
-                id: videoId,
-                ...snippet,
-                viewCount,
-              }
+          if (response.status === 200)
+            response
+              .json()
+              .then(videoData => {
+                const { items } = videoData
+                const { snippet, statistics } = items[0]
+                const {
+                  title,
+                  thumbnails,
+                  publishedAt,
+                  name,
+                  thumbnailUrl,
+                  uploadDate,
+                } = snippet
+                const { viewCount } = statistics
+                const schema = {
+                  id: videoId,
+                  ...snippet,
+                  viewCount,
+                }
 
-              if (REGIONS_ALLOWED) schema.regionsAllowed = REGIONS_ALLOWED
+                if (REGIONS_ALLOWED) schema.regionsAllowed = REGIONS_ALLOWED
 
-              if (!name && title) schema.name = title
-              if (!uploadDate && publishedAt) schema.uploadDate = publishedAt
-              if (
-                !thumbnailUrl &&
-                typeof thumbnails === "object" &&
-                thumbnails.default &&
-                thumbnails.default.url
-              )
-                schema.thumbnailUrl = thumbnails.default.url
+                if (!name && title) schema.name = title
+                if (!uploadDate && publishedAt) schema.uploadDate = publishedAt
+                if (
+                  !thumbnailUrl &&
+                  typeof thumbnails === "object" &&
+                  thumbnails.default &&
+                  thumbnails.default.url
+                )
+                  schema.thumbnailUrl = thumbnails.default.url
 
-              resolve(schema)
-            })
-            .catch(reject)
+                resolve(schema)
+              })
+              .catch(reject)
+          else response.json().then(reject)
         })
         .catch(reject)
     })
@@ -85,28 +89,37 @@ exports.sourceNodes = async ({
     await Promise.all(
       channelIds.map(async channelId => {
         const getAllChannelVideos = async pageToken => {
-          const channelData = await getChannelInfo({
-            channelId,
-            maxResults: pageSize,
-            order,
-            pageToken,
-            part,
-          })
+          try {
+            const channelData = await getChannelInfo({
+              channelId,
+              maxResults: pageSize,
+              order,
+              pageToken,
+              part,
+            })
 
-          const { items, nextPageToken } = channelData
-          const videoSchemas = await Promise.all(
-            items.reduce((schemas, resource) => {
-              const schema = getVideoSchema(resource.id)
-              if (schema) return [...schemas, schema]
-              return schemas
-            }, [])
-          )
+            const { items, nextPageToken } = channelData
+            const videoSchemas = await Promise.all(
+              items.reduce((schemas, resource) => {
+                try {
+                  const schema = getVideoSchema(resource.id)
+                  if (schema) return [...schemas, schema]
+                } catch (err) {
+                  console.log(err)
+                }
 
-          if (!nextPageToken) return videoSchemas
+                return schemas
+              }, [])
+            )
 
-          const nextPageVideos = await getAllChannelVideos(nextPageToken)
+            if (!nextPageToken) return videoSchemas
 
-          return [...videoSchemas, ...nextPageVideos]
+            const nextPageVideos = await getAllChannelVideos(nextPageToken)
+
+            return [...videoSchemas, ...nextPageVideos]
+          } catch (err) {
+            console.log(err)
+          }
         }
 
         return getAllChannelVideos()
