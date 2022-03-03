@@ -2,7 +2,7 @@ import React from "react"
 import Layout from "../components/layout"
 import styled from "styled-components"
 import Breadcrumb from "../components/Breadcrumb"
-import SEO from '../components/seo'
+import Seo from '../components/seo'
 import { Link } from "gatsby"
 
 const Lead = styled.div`
@@ -27,9 +27,9 @@ function TagsView({ tag }) {
   return (
     
     <Layout>
-     <SEO
-        title={"Posty powiązane z tagiem dotyczącym"+ " " + tag.name}
-        description={"Jesteś na stronie Moto Trips i zebraliśmy w tym miejscu wszystkie posty tematycznie powiązane z" + " " + tag.name}
+     <Seo
+        title={"Posty powiązane z tagiem dotyczącym " + tag.name}
+        description={"Jesteś na stronie Moto Trips i zebraliśmy w tym miejscu wszystkie posty tematycznie powiązane z " + tag.name}
         
         pathname={tag.slug}
         url={tag.uri}

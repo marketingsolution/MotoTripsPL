@@ -6,7 +6,6 @@ import { GatsbyImage, getImage } from "gatsby-plugin-image"
 import Seo from "../components/seo"
 import NewsPost from "../components/news-post-archive"
 import MotoTest from "../components/recomendetMotoTest"
-import parse from "html-react-parser"
 import YouTube from "../components/youtube"
 
 const Lead = styled.div`
@@ -58,7 +57,7 @@ const RightColumn = styled.div`
 function NewsView({ news }) {
   const image = getImage(news.featuredImage.node.localFile.childImageSharp)
 
-  const body = parse(news.paragraph1)
+  
   console.log(news.author.node.name)
   return (
     <Layout>

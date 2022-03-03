@@ -77,7 +77,7 @@ function NewsView({ news }) {
   console.log(news.gallery)
   console.log(news.title)
   const image = getImage(news.featuredImage.node.localFile.childImageSharp)
-  const datePublished = news.date
+  
   return (
     <Layout>
       <Seo
