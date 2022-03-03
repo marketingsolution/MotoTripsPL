@@ -26,9 +26,7 @@ module.exports = {
     author: `Moto Trips Polska`,
     twitterUsername: "@gasiopr",
   },
-  flags: {
-    PARALLEL_QUERY_RUNNING: true,
-  },
+
 
   plugins: [
     {
@@ -49,6 +47,9 @@ module.exports = {
           requestConcurrency: 5,
           previewRequestConcurrency: 2,
           timeout: 100000,
+        },
+        production: {
+          hardCacheMediaFiles: true,
         },
       },
     },
