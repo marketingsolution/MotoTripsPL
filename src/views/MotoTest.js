@@ -7,7 +7,7 @@ import Seo from "../components/seo"
 import NewsPost from "../components/news-post-archive"
 import MotoTest from "../components/recomendetMotoTest"
 import { Link } from "gatsby"
-
+import YouTube from "../components/youtube"
 const Lead = styled.div`
 p {
   font-size: 25px;
@@ -134,8 +134,9 @@ function NewsView({ news }) {
         <Lead dangerouslySetInnerHTML={{ __html: news.excerpt }}/>
 
        
-        <div  className={news.film === "" ? `hidden` : ``}>
-                  <iframe width="100%" height="315" src={news.film} title="YouTube video player" frameBorder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowFullScreen></iframe>
+        <div className={news.film === "" ? `hidden` : ``}>
+                  <YouTube src={news.film}/>
+
 
               </div>
         <div dangerouslySetInnerHTML={{ __html: news.paragraph1 }}></div>

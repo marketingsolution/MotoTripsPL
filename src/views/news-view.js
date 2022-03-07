@@ -120,8 +120,9 @@ function NewsView({ news }) {
             {news.lead}
           </Lead>
           
-              <div  className={news.film === "" ? `hidden` : ``}>
-                  <iframe width="100%" height="315" src={news.film} title="YouTube video player" frameBorder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowFullScreen></iframe>
+              <div className={news.film === "" ? `hidden` : ``}>
+                  <YouTube src={news.film}/>
+
 
               </div>
            

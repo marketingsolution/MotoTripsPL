@@ -123,6 +123,7 @@ module.exports = {
      * See https://www.gatsbyjs.com/docs/gatsby-image/#setting-zup-gatsby-image
      * if you're curious about it.
      */
+     `gatsby-plugin-mdx`,
     `gatsby-plugin-image`,
     `gatsby-transformer-sharp`,
     {
