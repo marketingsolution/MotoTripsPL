@@ -6,7 +6,7 @@ import { GatsbyImage, getImage } from "gatsby-plugin-image"
 import Seo from "../components/seo"
 import NewsPost from "../components/news-post-archive"
 import MotoTest from "../components/recomendetMotoTest"
-
+import YouTube from "../components/youtube"
 
 const Lead = styled.div`
 
@@ -56,7 +56,9 @@ display: none;
 
 function NewsView({ news }) {
   const image = getImage(news.featuredImage.node.localFile.childImageSharp)
-  console.log(news.gallery)
+
+  
+  console.log(news.author.node.name)
   return (
     
     <Layout>

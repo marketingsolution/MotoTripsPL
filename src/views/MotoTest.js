@@ -73,6 +73,7 @@ function NewsView({ news }) {
  console.log("tu powinna być galeria")
   console.log(news.gallery)
   const image = getImage(news.featuredImage.node.localFile.childImageSharp)
+  
   return (
     
     <Layout>

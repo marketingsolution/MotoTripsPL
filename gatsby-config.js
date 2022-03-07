@@ -23,9 +23,6 @@ module.exports = {
      twitterUsername: "@gasiopr",
     
   },
-  flags: {
-    PARALLEL_QUERY_RUNNING: true
-  },
 
   plugins: [
     {
@@ -40,17 +37,19 @@ module.exports = {
       resolve: `gatsby-source-wordpress`,
       options: {
         // the only required plugin option for WordPress is the GraphQL url.
-        url:
-          process.env.WPGRAPHQL_URL ||
-          `https://moto-trips.pl/graphql`,
-          schema: {
-            perPage: 20,
-            requestConcurrency: 5,
-            previewRequestConcurrency: 2,
-          }
-        }
-      }, 
-     `gatsby-plugin-sitemap`,
+        url: process.env.WPGRAPHQL_URL || `https://moto-trips.pl/graphql`,
+        schema: {
+          perPage: 20,
+          requestConcurrency: 5,
+          previewRequestConcurrency: 2,
+          timeout: 100000,
+        },
+        production: {
+          hardCacheMediaFiles: true,
+        },
+      },
+    },
+    `gatsby-plugin-sitemap`,
     /**
      * We need this plugin so that it adds the "File.publicURL" to our site
      * It will allow us to access static url's for assets like PDF's
