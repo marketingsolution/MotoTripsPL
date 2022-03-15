@@ -153,6 +153,7 @@ p {
   color:#b1b8bf;
   font-size: 18px;
   font-family: Lato;
+  font-weight: 300;
 }
 
 ul,
@@ -163,6 +164,7 @@ ol {
   margin-bottom: var(--spacing-8);
   list-style-position: inside;
   list-style-image: none;
+  color:#b1b8bf;
 }
 
 ul li,

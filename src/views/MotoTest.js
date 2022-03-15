@@ -86,6 +86,8 @@ function NewsView({ news }) {
         date={news.date}
         modified={news.modified}
         author={news.author.node.name}
+        body={news.paragraph1}
+        tag={news.tags.nodes.map(tag =>tag.name)}
       />
       
      
