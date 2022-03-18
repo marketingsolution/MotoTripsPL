@@ -1,0 +1,16 @@
+.container {
+  /* border: 2px solid red; */
+  padding-bottom: 30px;
+}
+
+.item {
+  display: flex;
+  /* justify-content: space-around; */
+  border-bottom: 1px solid #e9b000;
+  padding: 20px 10px;
+  color: #909191;
+}
+
+.item > div:nth-child(2) {
+  margin-left: 15%;
+}

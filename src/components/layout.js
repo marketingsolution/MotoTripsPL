@@ -1,33 +1,14 @@
 import React from "react"
-import { useStaticQuery, graphql } from "gatsby"
-import Header from './header'
-import Footer from './footer'
-import "@fontsource/finger-paint"
-import "@fontsource/lato"
-import "@fontsource/montserrat"
+import Navbar from "./Navbar"
 
-const Layout = ({ isHomePage, children }) => {
- useStaticQuery(graphql`
-    query LayoutQuery {
-      wp {
-        generalSettings {
-          title
-          description
-        }
-      }
-    }
-  `)
-
+export default function Layout({ children }) {
   return (
-    <div>
-    <Header />
-
-      <main>{children}</main>
-
-    <Footer />
-      
+    <div className="layout">
+      <Navbar />
+      <div className="content">{children}</div>
+      {/* <footer>
+        <p>Copyright 2021 Moto trip</p>
+      </footer> */}
     </div>
   )
 }
-
-export default Layout
