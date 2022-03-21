@@ -1,30 +1,9 @@
 const fetch = require(`node-fetch`)
 
 const API_KEY = process.env.YOUTUBE_DATA_API_V3_API_KEY
-const CHANNEL_IDS = process.env.YOUTUBE_CHANNEL_IDS
 const REGIONS_ALLOWED = process.env.REGIONS_ALLOWED
 
-const getChannelInfo = async ({
-  channelId,
-  maxResults,
-  order,
-  pageToken,
-  part,
-}) => {
-  if (!API_KEY || !channelId) return
-
-  const response = await fetch(
-    `https://www.googleapis.com/youtube/v3/search?key=${API_KEY}&channelId=${channelId}${
-      maxResults ? `&maxResults=${maxResults}` : ""
-    }${order ? `&order=${order}` : ""}${
-      pageToken ? `&pageToken=${pageToken}` : ""
-    }${part ? `&part=${part}` : ""}`
-  )
-
-  if (response.status === 200) return await response.json()
-
-  throw await response.json()
-}
+const kind = "youtube#video"
 
 const getVideoSchema = ({ kind, videoId }) => {
   if (!API_KEY || !videoId) return
@@ -80,61 +59,53 @@ const getVideoSchema = ({ kind, videoId }) => {
 exports.sourceNodes = async ({
   actions: { createNode },
   createContentDigest,
+  createNodeId,
+  getNodesByType,
 }) => {
-  const channelIds = CHANNEL_IDS.split(",")
-  const pageSize = 50
-  const order = "date"
-  const part = "snippet,id"
-  const result = (
-    await Promise.all(
-      channelIds.map(async channelId => {
-        const getAllChannelVideos = async pageToken => {
-          try {
-            const channelData = await getChannelInfo({
-              channelId,
-              maxResults: pageSize,
-              order,
-              pageToken,
-              part,
-            })
+  try {
+    const news = getNodesByType("WpNews")
+    const post = getNodesByType("WpPost")
+    const films = [...news, ...post].map(node => node.film)
 
-            const { items, nextPageToken } = channelData
-            const videoSchemas = await Promise.all(
-              items.reduce((schemas, resource) => {
-                try {
-                  const schema = getVideoSchema(resource.id)
-                  if (schema) return [...schemas, schema]
-                } catch (err) {
-                  console.log(err)
-                }
+    const videoIds = films.reduce((filmIds, film) => {
+      if (film.trim()) {
+        const filmParts = film.match(
+          /^https?\:\/\/(?:www\.youtube(?:\-nocookie)?\.com\/|m\.youtube\.com\/|youtube\.com\/)?(?:ytscreeningroom\?vi?=|youtu\.be\/|vi?\/|user\/.+\/u\/\w{1,2}\/|embed\/|watch\?(?:.*\&)?vi?=|\&vi?=|\?(?:.*\&)?vi?=)([^#\&\?\n\/<>"']*)/i
+        )
 
-                return schemas
-              }, [])
-            )
+        if (Array.isArray(filmParts) && filmParts.length > 1) {
+          const videoId = filmParts[1].trim()
+          if (videoId) return [...filmIds, videoId]
+        }
+      }
 
-            if (!nextPageToken) return videoSchemas
+      return filmIds
+    }, [])
 
-            const nextPageVideos = await getAllChannelVideos(nextPageToken)
-
-            return [...videoSchemas, ...nextPageVideos]
-          } catch (err) {
-            console.log(err)
-          }
+    const result = await Promise.all(
+      videoIds.reduce((schemas, videoId) => {
+        try {
+          const schema = getVideoSchema({ kind, videoId })
+          if (schema) return [...schemas, schema]
+        } catch (err) {
+          console.log(err)
         }
 
-        return getAllChannelVideos()
-      })
+        return schemas
+      }, [])
     )
-  ).flat()
 
-  createNode({
-    id: `youtube-video-schema`,
-    schema: result,
-    parent: null,
-    children: [],
-    internal: {
-      type: `Youtube`,
-      contentDigest: createContentDigest(result),
-    },
-  })
+    createNode({
+      id: createNodeId(`youtube-video-schema`),
+      schema: result,
+      parent: null,
+      children: [],
+      internal: {
+        type: `Youtube`,
+        contentDigest: createContentDigest(result),
+      },
+    })
+  } catch (err) {
+    console.log(err)
+  }
 }
