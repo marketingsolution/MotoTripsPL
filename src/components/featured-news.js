@@ -2,7 +2,7 @@ import React from "react"
 import { Link } from "gatsby"
 import { PostQuery } from "../hooks/last-post-query"
 import { GatsbyImage, getImage } from "gatsby-plugin-image"
-
+import parse from "html-react-parser"
 
 
 
@@ -25,7 +25,7 @@ const NewsList = () => {
                 <div className="featured-news" style={{ whiteSpace: `normal` }}>
                   <Link to={nodes.uri}>
                     <h3>{nodes.title}</h3>
-                    <p dangerouslySetInnerHTML={{ __html: nodes.excerpt.length <= 300 ? nodes.excerpt : nodes.excerpt.slice(0, 300) + '...' }}></p>
+                    <div>{parse(nodes.excerpt.length <= 300 ? nodes.excerpt : nodes.excerpt.slice(0, 300) + '...')}</div>
                   </Link>
                 </div>
               </div>

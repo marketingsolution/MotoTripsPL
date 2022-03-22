@@ -1,6 +1,6 @@
 import * as React from "react";
 import { graphql } from "gatsby";
-import PostView from "../views/MotoTest";
+import PostView from "../views/news-view";
 
 function Post(props) {
   const { allWpPost } = props.data;
@@ -37,8 +37,6 @@ export const query = graphql`
         tags {
           nodes {
             name
-            slug
-            uri
           }
         }
         date
