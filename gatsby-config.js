@@ -67,6 +67,14 @@ module.exports = {
     {
       resolve: `gatsby-source-filesystem`,
       options: {
+        name: `autorzy`,
+        path: `${__dirname}/src/pages/autorzy`,
+      },
+    },
+
+    {
+      resolve: `gatsby-source-filesystem`,
+      options: {
         name: `aktualnosci`,
         path: `${__dirname}/src/pages/aktualnosci`,
       },
