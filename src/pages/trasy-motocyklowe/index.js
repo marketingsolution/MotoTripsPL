@@ -4,7 +4,7 @@ import Breadcrumb from "../../components/Breadcrumb";
 import Seo from "../../components/seo";
 import { Link, graphql } from "gatsby";
 import { GatsbyImage, getImage } from 'gatsby-plugin-image'
-import { StaticImage } from "gatsby-plugin-image"
+
 
 const Trasy = ({ data }) => {
   
