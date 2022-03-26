@@ -6,10 +6,10 @@ import { GatsbyImage, getImage } from "gatsby-plugin-image"
 import Seo from "../components/seo"
 import NewsPost from "../components/news-post-archive"
 import MotoTest from "../components/recomendetMotoTest"
-import parse from "html-react-parser"
 import YouTube from "../components/youtube"
 
 const Lead = styled.div`
+
   p {
     font-size: 25px;
   }
@@ -21,143 +21,137 @@ const Lead = styled.div`
   padding-bottom: 25px;
 `
 const LeftColumn = styled.div`
-  @media (min-width: 1025px) {
-    width: 70%;
-    padding: 0 25px;
-    p {
-      color: #919191;
-    }
-    ul {
-      color: #919191;
-      padding: 10px 50px;
-    }
-  }
-  width: 95%;
-  margin: 0 auto;
-  p {
+@media (min-width: 1025px) {
+  width: 70%;
+  padding: 0 25px;
+  p{
     color: #919191;
   }
-  ul,
-  ol {
+  ul{
     color: #919191;
-    padding: 5px 0 5px 5%;
-  }
-  table {
-    color: #919191;
-  }
+    padding: 10px 50px;
+ }
+}
+width: 95%;
+margin: 0 auto;
+p{
+  color: #919191;
+}
+ul, ol{
+  color: #919191;
+   padding: 5px 0 5px 5%;
+}
+table{
+  color: #919191;
+}
 `
 const RightColumn = styled.div`
-  @media (min-width: 1025px) {
-    width: 30%;
-    display: block;
-    padding-top: 100vh;
-  }
-  display: none;
+@media (min-width: 1025px) {
+  width: 30%;
+  display: block;
+  padding-top: 100vh;
+}
+display: none;
 `
 
 function NewsView({ news }) {
   const image = getImage(news.featuredImage.node.localFile.childImageSharp)
 
-  const body = parse(news.paragraph1)
+  
   console.log(news.author.node.name)
   return (
+    
     <Layout>
       <Seo
-        article
         title={news.title}
-        description={news.excerpt.slice(3, 135)}
+        description={news.excerpt} 
         image={news.featuredImage.node.localFile.url}
         pathname={news.slug}
-        url={news.uri}
+        article
         date={news.date}
         modified={news.modified}
         author={news.author.node.name}
         body={news.paragraph1}
+        
       />
-
-      {/* <SchemaArticle
-      description={news.lead} 
-      authorName= {news.author.node.name}
-      copyrightHolder="Moto Trips Polska"
-      copyrightYear={new Date().getFullYear()}
-      date={news.date}
-      dateModified={news.modified}
-      headline={news.title}
-      url={"https://mototrips.pl" + news.uri}
-      keywords={news.tags}
-      body= {news.paragraph1}
-      image={image}
-      />*/}
-
+      
+      
+     
       <main>
-        <div style={{ display: "grid" }}>
-          {/* You can use a GatsbyImage component if the image is dynamic */}
-          <GatsbyImage
-            style={{
-              gridArea: "1/1",
-              // You can set a maximum height for the image, if you wish.
-              maxHeight: 500,
-              backgroundColor: "#e9b000",
-            }}
-            layout="fullWidth"
-            // You can optionally force an aspect ratio for the generated image
-            aspectRatio={3 / 1}
-            // This is a presentational image, so the alt should be an empty string
-            alt={news.featuredImage.node.altText}
-            // Assisi, Perúgia, Itália by Bernardo Ferrari, via Unsplash
-            image={image}
-            formats={["auto", "webp", "avif"]}
-          />
-          <div
-            className="layer"
-            style={{
-              // By using the same grid area for both, they are stacked on top of each other
-              gridArea: "1/1",
-              position: "relative",
-              // This centers the other elements inside the hero component
-              placeItems: "center",
-              display: "grid",
-            }}
-          >
-            {/* Any content here will be centered in the component */}
-            <h1>{news.title}</h1>
-          </div>
-        </div>
-        <Breadcrumb
-          title={news.title}
-          path="/aktualnosci"
-          pathName="Aktualności"
-        />
+      <div style={{ display: "grid" }}>
+      {/* You can use a GatsbyImage component if the image is dynamic */}
+      <GatsbyImage
+        style={{
+          gridArea: "1/1",
+          // You can set a maximum height for the image, if you wish.
+          maxHeight: 500,
+          backgroundColor: "#e9b000",
+        }}
+        layout="fullWidth"
+        // You can optionally force an aspect ratio for the generated image
+        aspectRatio={3 / 1}
+        // This is a presentational image, so the alt should be an empty string
+        alt={news.featuredImage.node.altText} 
+        // Assisi, Perúgia, Itália by Bernardo Ferrari, via Unsplash
+        image={image}
+        formats={["auto", "webp", "avif"]}
+      />
+      <div className="layer"
+        style={{
+          // By using the same grid area for both, they are stacked on top of each other
+          gridArea: "1/1",
+          position: "relative",
+          // This centers the other elements inside the hero component
+          placeItems: "center",
+          display: "grid",
+          
+        }}
+      >
+        {/* Any content here will be centered in the component */}
+        <h1>{news.title}</h1>
+      </div>
+    </div>
+    <Breadcrumb title={news.title} path="/aktualnosci" pathName="Aktualności"/>
         <div className="row flex">
-          <LeftColumn>
-            <Lead>{news.lead}</Lead>
+        
+        <LeftColumn>
+       
+          <Lead>
+            
+            <div dangerouslySetInnerHTML={{ __html: news.excerpt }}></div>
+            {news.lead}
+          </Lead>
+          
+              <div className={news.film === "" ? `hidden` : ``}>
+                  <YouTube src={news.film}/>
 
-            {news.film && <YouTube src={news.film} />}
 
-            <div dangerouslySetInnerHTML={{ __html: news.paragraph1 }}></div>
-
-            <div
-              className="gallery-items"
-              dangerouslySetInnerHTML={{ __html: news.gallery }}
-            ></div>
-
-            <div dangerouslySetInnerHTML={{ __html: news.paragraph2 }}></div>
-          </LeftColumn>
+              </div>
+           
+              <div dangerouslySetInnerHTML={{ __html: news.paragraph1 }}></div>
+              
+              <div dangerouslySetInnerHTML={{ __html: news.paragraph2 }}></div>
+          </ LeftColumn>
           <RightColumn>
-            <MotoTest />
+            <MotoTest/>
           </RightColumn>
         </div>
-        <div className="row">
-          <LeftColumn>
-            <h2>Pozostałe newsy</h2>
-          </LeftColumn>
+        <div className="row"> 
+        <LeftColumn>
+          
+             <h2>Pozostałe newsy</h2>
+          
+        </ LeftColumn>
         </div>
-
+        
         <div className="scrolling-wrapper">
-          <NewsPost />
+          
+         <NewsPost />
         </div>
       </main>
-    </Layout>
+     
+      </Layout>
+     
   )
 }
 

@@ -27,7 +27,6 @@ module.exports = {
     twitterUsername: "@gasiopr",
   },
 
-
   plugins: [
     {
       /**
@@ -127,6 +126,7 @@ module.exports = {
      * See https://www.gatsbyjs.com/docs/gatsby-image/#setting-zup-gatsby-image
      * if you're curious about it.
      */
+    `gatsby-plugin-mdx`,
     `gatsby-plugin-image`,
     `gatsby-transformer-sharp`,
     {
@@ -169,14 +169,6 @@ module.exports = {
         trackingId: "UA-114936908-1",
         // Defines where to place the tracking script - `true` in the head and `false` in the body
         head: true,
-        enableWebVitalsTracking: true,
-      },
-    },
-    {
-      resolve: "gatsby-plugin-google-tagmanager",
-      options: {
-        id: "GTM-T3Z5ZR7",
-        includeInDevelopment: true,
         enableWebVitalsTracking: true,
       },
     },

@@ -48,7 +48,7 @@ class Catalog extends React.Component {
     <Layout>
         <Seo
         title="Katalog Motocykli"
-        description="Największy katalog motocyjkli, mamy dane techniczne motocykli od 2000 roku"
+        description="Zapraszamy niezależny portal motocyklowy newsy ze świata moto. Co nowego w motocyklach"
         image="https://moto-trips.pl/wp-content/uploads/2019/02/news.jpg"
         pathname="/aktualnosci/"
         author="Przemysław Gąsiorowski"

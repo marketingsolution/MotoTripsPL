@@ -341,30 +341,6 @@ width: 200px
   max-width: 250px;
   padding: 10px;
 }
-
-.col-3 {
-  display: inline-block;
-  max-width: 350px;
-  min-width: 150px;
-  justify-content:space-around;
-  text-align: center;
-  color: #919191;
-}
-.headline {
-  
-  font-size: 20px;
-  color: #E9b000;
-  text-align: center;
-  
-}
-.spec{
- 
- width: 100%;
-  font-size: 18px;
-  padding: 15px 0;
-
-  }
-
 /* Media queries */
 
 @media (max-width: 800px) {
@@ -383,7 +359,4 @@ width: 200px
   .gallery-catalog {
     max-width: 100%;
   }
-}
-.przemek {
-  border-radius: 20px;
 }

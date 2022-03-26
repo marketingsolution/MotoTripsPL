@@ -9,8 +9,8 @@ const Aktualnosci = () => {
   return (
     <Layout>
        <Seo
-        title="Nowości ze świata motocykli adventure"
-        description="Co nowego w motocyklach klasy adventure i nie tylko wpadaj na Moto Trips, Twój partner w przygodach."
+        title="Aktualności ze świata motocykli"
+        description="Zapraszamy niezależny portal motocyklowy newsy ze świata moto. Co nowego w motocyklach"
         image="https://moto-trips.pl/wp-content/uploads/2019/02/news.jpg"
         pathname="/aktualnosci"
       />
