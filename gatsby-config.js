@@ -126,7 +126,20 @@ module.exports = {
      * See https://www.gatsbyjs.com/docs/gatsby-image/#setting-zup-gatsby-image
      * if you're curious about it.
      */
-    `gatsby-plugin-mdx`,
+    {
+      resolve: `gatsby-plugin-mdx`,
+      options: {
+        gatsbyRemarkPlugins: [
+          {
+            resolve: `gatsby-remark-images`,
+            options: {
+              maxWidth: 1080,
+            },
+          },
+        ],
+      },
+    },
+    `gatsby-remark-images`,
     `gatsby-plugin-image`,
     `gatsby-transformer-sharp`,
     {
@@ -138,7 +151,19 @@ module.exports = {
         failOnError: false,
       },
     },
-
+    {
+      resolve: `gatsby-transformer-remark`,
+      options: {
+        plugins: [
+          {
+            resolve: `gatsby-remark-images`,
+            options: {
+              maxWidth: 1080,
+            },
+          },
+        ],
+      },
+    },
     {
       // See https://www.gatsbyjs.com/plugins/gatsby-plugin-manifest/?=gatsby-plugin-manifest
       resolve: `gatsby-plugin-manifest`,
@@ -169,6 +194,14 @@ module.exports = {
         trackingId: "UA-114936908-1",
         // Defines where to place the tracking script - `true` in the head and `false` in the body
         head: true,
+        enableWebVitalsTracking: true,
+      },
+    },
+    {
+      resolve: "gatsby-plugin-google-tagmanager",
+      options: {
+        id: "GTM-T3Z5ZR7",
+        includeInDevelopment: true,
         enableWebVitalsTracking: true,
       },
     },

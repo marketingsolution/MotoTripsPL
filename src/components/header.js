@@ -138,10 +138,10 @@ const Header = () => {
                     <Link to="/aktualnosci/">Aktualności</Link>
                 </div>
                 <div>
-                    <Link to="/moto-test/">Testy</Link>
+                    <Link to="/moto-test/">Testy motocykli</Link>
                 </div>
                 <div>
-                    <a href="https://moto-trips.pl/katalog-motocykli/">Katalog Motocykli</a>
+                    <Link to="/sprzet/">Sprzęt</Link>
                 </div>
                 <div>
                     <a href="/trasy-motocyklowe/">Trasy</a>

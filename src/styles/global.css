@@ -341,6 +341,16 @@ width: 200px
   max-width: 250px;
   padding: 10px;
 }
+.left-column{
+  width: 70%;
+  padding: 0 25px;
+}
+.right-column {
+  width: 30%;
+  display: block;
+  padding-top: 100vh;
+}
+
 /* Media queries */
 
 @media (max-width: 800px) {
@@ -358,5 +368,14 @@ width: 200px
   }
   .gallery-catalog {
     max-width: 100%;
+  }
+  .left-column{
+    width: 95%;
+    padding: 0;
+  }
+  .right-column {
+    
+    display: none;
+    
   }
 }
