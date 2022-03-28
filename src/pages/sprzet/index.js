@@ -1,26 +1,28 @@
 import React from "react";
-import Layout from '../../components/layout'
-import Breadcrumb from '../../components/Breadcrumb'
+import Layout from "../../components/layout"
+import Breadcrumb from "../../components/Breadcrumb";
 import Seo from "../../components/seo";
 import { Link, graphql } from "gatsby";
 import { GatsbyImage, getImage } from 'gatsby-plugin-image'
 
-const News = ({ data }) => {
+
+const Trasy = ({ data }) => {
+  
   return (
     <Layout>
        <Seo
-        title="Aktualności ze świata motocykli"
-        description="Zapraszamy niezależny portal motocyklowy newsy ze świata moto. Co nowego w motocyklach"
-        image="https://moto-trips.pl/wp-content/uploads/2019/02/news.jpg"
-        pathname="/news"
+        title="Sprzęt dla motocyklistów to co niezbędne plus masa dodatów"
+        description="W tej sekcji prezentujemy testy sprzętu dla motocyklistów, kurtki, buty czy bielizna wszystko czego potrzebujesz."
+        image="https://moto-trips.pl/wp-content/uploads/2020/06/okładka-www.jpg"
+        pathname="/sprzet"
       />
-      <Breadcrumb title="News"/>
+      <Breadcrumb title="Sprzęt"/>
       <div className="row flex">
         {
             data.allMdx.nodes.map((node) => (
              
                 <article key={node.id}>
-                  <Link to={`/news/${node.slug}`}>
+                  <Link to={`/sprzet/${node.slug}`}>
                   <div className="featured-news">
                   
                     <GatsbyImage
@@ -31,7 +33,7 @@ const News = ({ data }) => {
                   </div>
                   </Link>
                   <div className="featured-news">
-                  <Link to={`/news/${node.slug}`}>
+                  <Link to={`/sprzet/${node.slug}`}>
                         <h2>{node.frontmatter.title}</h2>
                   </Link>
                     <p className="card-date">{node.frontmatter.date}</p>
@@ -56,9 +58,10 @@ const News = ({ data }) => {
     </Layout>
   );
 };
+
 export const query = graphql`
 query {
-    allMdx(sort: {fields: frontmatter___date, order: DESC}, filter: {frontmatter: {category: {eq: "News"}}}) {
+    allMdx(sort: {fields: frontmatter___date, order: DESC}, filter: {frontmatter: {category: {eq: "Sprzęt"}}}) {
         nodes {
           frontmatter {
             date(formatString: "DD-MM-YYYY r.")
@@ -79,4 +82,6 @@ query {
       }
 }
 `
-export default News;
+
+
+export default Trasy;

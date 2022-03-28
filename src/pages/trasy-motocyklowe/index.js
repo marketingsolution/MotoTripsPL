@@ -61,13 +61,17 @@ const Trasy = ({ data }) => {
 
 export const query = graphql`
 query {
-    allMdx(sort: {fields: frontmatter___date, order: DESC}) {
+    allMdx(
+      filter: {frontmatter: {category: {in: "Trasy motocyklowe"}}}
+      sort: {fields: frontmatter___date, order: DESC}
+    ){
         nodes {
           frontmatter {
             date(formatString: "DD-MM-YYYY r.")
             title
             author
             lead
+            category
             hero_image_alt
             hero_image {
               childImageSharp {

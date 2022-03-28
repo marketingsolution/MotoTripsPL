@@ -6,6 +6,10 @@
  *
  */
 
+require("dotenv").config({
+  path: `.env.${process.env.NODE_ENV}`,
+})
+
 module.exports = {
   /**
    * Adding plugins to this array adds them to your Gatsby site.
@@ -13,15 +17,14 @@ module.exports = {
    * Gatsby has a rich ecosystem of plugins.
    * If you need any more you can search here: https://www.gatsbyjs.com/plugins/
    */
-   siteMetadata: {
-     title:`Moto Trips - portal motocyklowy 🏍️ testy, opinie, trasy 🏕️`,
-     titleTemplate: "%s - Moto Trips.",
-     siteUrl: "https://mototrips.pl",
-     image: "/logo-moto-trips.PNG",
-     description:`Moto Trips 🌍 to portal motocyklowy w którym prezentujemy moto testy, sprzęt dla motocyklistów recenzje, opinie, a także ciekawe trasy motocyklowe. 🛣️`,
-     author: `Moto Trips Polska`,
-     twitterUsername: "@gasiopr",
-    
+  siteMetadata: {
+    title: `Moto Trips - portal motocyklowy 🏍️ testy, opinie, trasy 🏕️`,
+    titleTemplate: "%s - Moto Trips.",
+    siteUrl: "https://mototrips.pl",
+    image: "/logo-moto-trips.PNG",
+    description: `Moto Trips 🌍 to portal motocyklowy w którym prezentujemy moto testy, sprzęt dla motocyklistów recenzje, opinie, a także ciekawe trasy motocyklowe. 🛣️`,
+    author: `Moto Trips Polska`,
+    twitterUsername: "@gasiopr",
   },
 
   plugins: [
@@ -131,7 +134,20 @@ module.exports = {
      * See https://www.gatsbyjs.com/docs/gatsby-image/#setting-zup-gatsby-image
      * if you're curious about it.
      */
-     `gatsby-plugin-mdx`,
+    {
+      resolve: `gatsby-plugin-mdx`,
+      options: {
+        gatsbyRemarkPlugins: [
+          {
+            resolve: `gatsby-remark-images`,
+            options: {
+              maxWidth: 1080,
+            },
+          },
+        ],
+      },
+    },
+    `gatsby-remark-images`,
     `gatsby-plugin-image`,
     `gatsby-transformer-sharp`,
     {
@@ -141,10 +157,21 @@ module.exports = {
         defaults: {},
         // Set to false to allow builds to continue on image errors
         failOnError: false,
-             
       },
     },
-  
+    {
+      resolve: `gatsby-transformer-remark`,
+      options: {
+        plugins: [
+          {
+            resolve: `gatsby-remark-images`,
+            options: {
+              maxWidth: 1080,
+            },
+          },
+        ],
+      },
+    },
     {
       // See https://www.gatsbyjs.com/plugins/gatsby-plugin-manifest/?=gatsby-plugin-manifest
       resolve: `gatsby-plugin-manifest`,
@@ -171,14 +198,20 @@ module.exports = {
     {
       resolve: `gatsby-plugin-google-analytics`,
       options: {
-      // The property ID; the tracking code won't be generated without it
-      trackingId: "UA-114936908-1",
-      // Defines where to place the tracking script - `true` in the head and `false` in the body
-      head: true,
-      enableWebVitalsTracking: true,
+        // The property ID; the tracking code won't be generated without it
+        trackingId: "UA-114936908-1",
+        // Defines where to place the tracking script - `true` in the head and `false` in the body
+        head: true,
+        enableWebVitalsTracking: true,
       },
     },
-   
-  
+    {
+      resolve: "gatsby-plugin-google-tagmanager",
+      options: {
+        id: "GTM-T3Z5ZR7",
+        includeInDevelopment: true,
+        enableWebVitalsTracking: true,
+      },
+    },
   ],
 }
