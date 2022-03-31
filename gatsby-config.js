@@ -70,14 +70,6 @@ module.exports = {
     {
       resolve: `gatsby-source-filesystem`,
       options: {
-        name: `autorzy`,
-        path: `${__dirname}/src/pages/autorzy`,
-      },
-    },
-
-    {
-      resolve: `gatsby-source-filesystem`,
-      options: {
         name: `aktualnosci`,
         path: `${__dirname}/src/pages/aktualnosci`,
       },
@@ -86,7 +78,23 @@ module.exports = {
     {
       resolve: `gatsby-source-filesystem`,
       options: {
-        name: `moto test`,
+        name: `autorzy`,
+        path: `${__dirname}/src/pages/autorzy`,
+      },
+    },
+
+    {
+      resolve: `gatsby-source-filesystem`,
+      options: {
+        name: `katalog motocykli`,
+        path: `${__dirname}/src/pages/katalog-motocykli`,
+      },
+    },
+
+    {
+      resolve: `gatsby-source-filesystem`,
+      options: {
+        name: `moto-test`,
         path: `${__dirname}/src/pages/moto-test`,
       },
     },
@@ -102,18 +110,11 @@ module.exports = {
     {
       resolve: `gatsby-source-filesystem`,
       options: {
-        name: `trasy`,
-        path: `${__dirname}/src/pages/trasy-motocyklowe`,
-      },
-    },
-
-    {
-      resolve: `gatsby-source-filesystem`,
-      options: {
         name: `sprzet`,
         path: `${__dirname}/src/pages/sprzet`,
       },
     },
+
     {
       resolve: `gatsby-source-filesystem`,
       options: {
@@ -121,13 +122,15 @@ module.exports = {
         path: `${__dirname}/src/pages/tag`,
       },
     },
+
     {
       resolve: `gatsby-source-filesystem`,
       options: {
-        name: `katalog motocykli`,
-        path: `${__dirname}/src/pages/katalog-motocykli`,
+        name: `trasy-motocyklowe`,
+        path: `${__dirname}/src/pages/trasy-motocyklowe`,
       },
     },
+
 
     /**
      * The following two plugins are required if you want to use Gatsby image
@@ -142,6 +145,9 @@ module.exports = {
             resolve: `gatsby-remark-images`,
             options: {
               maxWidth: 1080,
+              defaultLayouts: {
+                default: require.resolve("./src/components/layout.js"),
+              },
             },
           },
         ],
