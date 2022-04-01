@@ -1,14 +1,14 @@
-import * as React from "react";
-import { graphql } from "gatsby";
-import NewsView from "../../views/news-view";
+import * as React from "react"
+import { graphql } from "gatsby"
+import NewsView from "../../views/news-view"
 
 function News(props) {
-  const { allWpNews } = props.data;
-  console.log(allWpNews)
-  return <NewsView news={allWpNews.nodes[0]} />;
+  const { allWpNews } = props.data
+  // console.log(allWpNews)
+  return <NewsView news={allWpNews.nodes[0]} />
 }
 
-export default News;
+export default News
 
 export const query = graphql`
   query($slug: String!) {
@@ -29,7 +29,7 @@ export const query = graphql`
             name
           }
         }
-        
+
         date
         featuredImage {
           node {
@@ -41,9 +41,9 @@ export const query = graphql`
                 gatsbyImageData(formats: WEBP)
               }
             }
-            }
           }
+        }
       }
     }
   }
-`;
+`
