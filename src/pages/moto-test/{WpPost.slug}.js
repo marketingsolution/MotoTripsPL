@@ -1,15 +1,15 @@
-import * as React from "react";
-import { graphql } from "gatsby";
-import PostView from "../../views/MotoTest";
+import * as React from "react"
+import { graphql } from "gatsby"
+import PostView from "../../views/MotoTest"
 
 function Post(props) {
-  const { allWpPost } = props.data;
-  console.log(allWpPost)
+  const { allWpPost } = props.data
+  // console.log(allWpPost)
 
-  return <PostView news={allWpPost.nodes[0]} />;
+  return <PostView news={allWpPost.nodes[0]} />
 }
 
-export default Post;
+export default Post
 
 export const query = graphql`
   query($slug: String!) {
@@ -52,12 +52,12 @@ export const query = graphql`
                 gatsbyImageData(
                   formats: [AUTO, WEBP, AVIF]
                   placeholder: BLURRED
-                  )
+                )
               }
             }
-            }
           }
+        }
       }
     }
   }
-`;
+`
