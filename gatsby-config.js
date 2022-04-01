@@ -78,7 +78,23 @@ module.exports = {
     {
       resolve: `gatsby-source-filesystem`,
       options: {
-        name: `moto test`,
+        name: `autorzy`,
+        path: `${__dirname}/src/pages/autorzy`,
+      },
+    },
+
+    {
+      resolve: `gatsby-source-filesystem`,
+      options: {
+        name: `katalog motocykli`,
+        path: `${__dirname}/src/pages/katalog-motocykli`,
+      },
+    },
+
+    {
+      resolve: `gatsby-source-filesystem`,
+      options: {
+        name: `moto-test`,
         path: `${__dirname}/src/pages/moto-test`,
       },
     },
@@ -94,18 +110,11 @@ module.exports = {
     {
       resolve: `gatsby-source-filesystem`,
       options: {
-        name: `trasy`,
-        path: `${__dirname}/src/pages/trasy-motocyklowe`,
-      },
-    },
-
-    {
-      resolve: `gatsby-source-filesystem`,
-      options: {
         name: `sprzet`,
         path: `${__dirname}/src/pages/sprzet`,
       },
     },
+
     {
       resolve: `gatsby-source-filesystem`,
       options: {
@@ -113,20 +122,38 @@ module.exports = {
         path: `${__dirname}/src/pages/tag`,
       },
     },
+
     {
       resolve: `gatsby-source-filesystem`,
       options: {
-        name: `katalog motocykli`,
-        path: `${__dirname}/src/pages/katalog-motocykli`,
+        name: `trasy-motocyklowe`,
+        path: `${__dirname}/src/pages/trasy-motocyklowe`,
       },
     },
+
 
     /**
      * The following two plugins are required if you want to use Gatsby image
      * See https://www.gatsbyjs.com/docs/gatsby-image/#setting-zup-gatsby-image
      * if you're curious about it.
      */
-    `gatsby-plugin-mdx`,
+    {
+      resolve: `gatsby-plugin-mdx`,
+      options: {
+        gatsbyRemarkPlugins: [
+          {
+            resolve: `gatsby-remark-images`,
+            options: {
+              maxWidth: 1080,
+              defaultLayouts: {
+                default: require.resolve("./src/components/layout.js"),
+              },
+            },
+          },
+        ],
+      },
+    },
+    `gatsby-remark-images`,
     `gatsby-plugin-image`,
     `gatsby-transformer-sharp`,
     {
@@ -138,7 +165,19 @@ module.exports = {
         failOnError: false,
       },
     },
-
+    {
+      resolve: `gatsby-transformer-remark`,
+      options: {
+        plugins: [
+          {
+            resolve: `gatsby-remark-images`,
+            options: {
+              maxWidth: 1080,
+            },
+          },
+        ],
+      },
+    },
     {
       // See https://www.gatsbyjs.com/plugins/gatsby-plugin-manifest/?=gatsby-plugin-manifest
       resolve: `gatsby-plugin-manifest`,
@@ -169,6 +208,14 @@ module.exports = {
         trackingId: "UA-114936908-1",
         // Defines where to place the tracking script - `true` in the head and `false` in the body
         head: true,
+        enableWebVitalsTracking: true,
+      },
+    },
+    {
+      resolve: "gatsby-plugin-google-tagmanager",
+      options: {
+        id: "GTM-T3Z5ZR7",
+        includeInDevelopment: true,
         enableWebVitalsTracking: true,
       },
     },

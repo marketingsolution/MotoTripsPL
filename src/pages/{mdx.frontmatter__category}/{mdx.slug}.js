@@ -54,15 +54,18 @@ const TripPost = ({ data }) => {
                 <h1>{data.mdx.frontmatter.title}</h1>
               </div>
             </div>    
-            <Breadcrumb title={data.mdx.frontmatter.title} path="/trasy-motocyklowe" pathName="Trasy Motocyklowe" />
+            <Breadcrumb title={data.mdx.frontmatter.title} path={data.mdx.frontmatter.category} pathName={data.mdx.frontmatter.category} />
             
           
             
             <div className="row">
-            <p className='lead'>{data.mdx.frontmatter.lead}</p>
-              <MDXRenderer>
-                  {data.mdx.body}
-              </MDXRenderer>
+              <div className='left-column'>
+                <p className='lead'>{data.mdx.frontmatter.lead}</p>
+                <MDXRenderer>
+                    {data.mdx.body}
+                </MDXRenderer>
+              </div>
+           <div className='right-column'></div>
             </div>
         </Layout>
     )
@@ -72,10 +75,13 @@ const TripPost = ({ data }) => {
 export const query = graphql`
 query ($id: String) {
     mdx(id: {eq: $id}) {
+      id
+      slug
       frontmatter {
         title
         author
         lead
+        category
         hero_image_alt
         hero_image_credit_link
         hero_image_credit_text

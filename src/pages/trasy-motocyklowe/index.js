@@ -4,7 +4,7 @@ import Breadcrumb from "../../components/Breadcrumb";
 import Seo from "../../components/seo";
 import { Link, graphql } from "gatsby";
 import { GatsbyImage, getImage } from 'gatsby-plugin-image'
-import { StaticImage } from "gatsby-plugin-image"
+
 
 const Trasy = ({ data }) => {
   
@@ -61,13 +61,17 @@ const Trasy = ({ data }) => {
 
 export const query = graphql`
 query {
-    allMdx(sort: {fields: frontmatter___date, order: DESC}) {
+    allMdx(
+      filter: {frontmatter: {category: {in: "Trasy motocyklowe"}}}
+      sort: {fields: frontmatter___date, order: DESC}
+    ){
         nodes {
           frontmatter {
             date(formatString: "DD-MM-YYYY r.")
             title
             author
             lead
+            category
             hero_image_alt
             hero_image {
               childImageSharp {
