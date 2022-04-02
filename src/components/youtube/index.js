@@ -109,4 +109,6 @@ export default function YouTube({ src }) {
       )
     }
   }
+
+  return null
 }
