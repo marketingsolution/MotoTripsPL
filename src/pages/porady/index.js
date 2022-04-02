@@ -9,12 +9,12 @@ const News = ({ data }) => {
   return (
     <Layout>
        <Seo
-        title="Aktualności ze świata motocykli"
-        description="Zapraszamy niezależny portal motocyklowy newsy ze świata moto. Co nowego w motocyklach"
+        title="Porady dla motocyklisów i nie tylko"
+        description="Jesteś posiadaczem jednośladu, niezależnie od tego czy to motocykl, motorower czy skuter, znajdziesz tu porady które pomogą Ci w obsłudze rejestracji czy utrzymaniu swojego sprzętu"
         image="https://moto-trips.pl/wp-content/uploads/2019/02/news.jpg"
-        pathname="/news"
+        pathname="/porady"
       />
-      <Breadcrumb title="News"/>
+      <Breadcrumb title="Porady"/>
       <div className="row flex">
         {
             data.allMdx.nodes.map((node) => (
@@ -58,7 +58,7 @@ const News = ({ data }) => {
 };
 export const query = graphql`
 query {
-    allMdx(sort: {fields: frontmatter___date, order: DESC}, filter: {frontmatter: {category: {eq: "News"}}}) {
+    allMdx(sort: {fields: frontmatter___date, order: DESC}, filter: {frontmatter: {category: {eq: "Porady"}}}) {
         nodes {
           frontmatter {
             date(formatString: "DD-MM-YYYY r.")
