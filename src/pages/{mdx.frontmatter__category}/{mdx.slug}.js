@@ -54,11 +54,11 @@ const TripPost = ({ data }) => {
                 <h1>{data.mdx.frontmatter.title}</h1>
               </div>
             </div>    
-            <Breadcrumb title={data.mdx.frontmatter.title} path={data.mdx.frontmatter.category} pathName={data.mdx.frontmatter.category} />
+            <Breadcrumb title={data.mdx.frontmatter.title} path={`/${data.mdx.frontmatter.category.replace(" ", "-").toLowerCase()}`} pathName={data.mdx.frontmatter.category} />
             
           
             
-            <div className="row">
+            <div className="row flex">
               <div className='left-column'>
                 <p className='lead'>{data.mdx.frontmatter.lead}</p>
                 <MDXRenderer>

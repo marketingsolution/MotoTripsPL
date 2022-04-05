@@ -102,16 +102,31 @@ module.exports = {
     {
       resolve: `gatsby-source-filesystem`,
       options: {
+        name: `moto-test-mdx`,
+        path: `${__dirname}/moto-test`,
+      },
+    },
+
+    {
+      resolve: "gatsby-source-filesystem",
+      options: {
         name: `news`,
-        path: `${__dirname}/src/pages/news`,
+        path: `${__dirname}/news`,
+      }
+    },
+    {
+      resolve: `gatsby-source-filesystem`,
+      options: {
+        name: `porady`,
+        path: `${__dirname}/src/pages/porady`,
       },
     },
 
     {
       resolve: `gatsby-source-filesystem`,
       options: {
-        name: `porady`,
-        path: `${__dirname}/src/pages/porady`,
+        name: `porady-mdx`,
+        path: `${__dirname}/porady`,
       },
     },
 
@@ -135,7 +150,7 @@ module.exports = {
       resolve: `gatsby-source-filesystem`,
       options: {
         name: `trasy-motocyklowe`,
-        path: `${__dirname}/src/pages/trasy-motocyklowe`,
+        path: `${__dirname}/trasy-motocyklowe`,
       },
     },
 

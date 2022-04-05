@@ -86,7 +86,7 @@ export default function YouTube({ src }) {
               return (
                 schema && (
                   <Helmet>
-                    <script type="ld+json">
+                    <script type="application/ld+json">
                       {JSON.stringify({
                         "@context": "https://schema.org",
                         "@type": "VideoObject",

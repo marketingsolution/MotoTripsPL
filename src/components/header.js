@@ -142,7 +142,10 @@ const Header = () => {
                 </div>
                 
                 <div>
-                    <a href="/trasy-motocyklowe/">Trasy</a>
+                    <Link to="/trasy-motocyklowe/">Trasy</Link>
+                </div>
+                <div>
+                    <Link to="/porady/">Porady</Link>
                 </div>
                 <div>
                     <a href="https://moto-trips.pl/kontakt">Kontakt</a>
