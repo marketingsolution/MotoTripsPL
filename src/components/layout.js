@@ -1,7 +1,7 @@
 import React from "react"
 import { useStaticQuery, graphql } from "gatsby"
 import Header from './header'
-import Footer from './footer'
+import Footer from './Footer/footer'
 import "@fontsource/finger-paint"
 import "@fontsource/lato"
 import "@fontsource/montserrat"

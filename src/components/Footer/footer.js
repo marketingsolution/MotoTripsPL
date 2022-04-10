@@ -2,6 +2,14 @@ import React from "react"
 import styled from "styled-components"
 import { Link } from 'gatsby'
 import { StaticImage } from "gatsby-plugin-image"
+import { FooterStyles, FooterMenuStyles, CopyrightStyles } from "./FooterStyles"
+
+import {
+    FaFacebookSquare as Facebook,
+    FaInstagram as Instagram,
+    FaYoutube as YouTube,
+  } from "react-icons/fa"
+
 const FooterLinks = styled.nav`
 
     display: flex;
@@ -12,6 +20,10 @@ const FooterLinks = styled.nav`
    
     a {
         margin: 10px;
+        transition: color 0.3s ease;
+        
+        color: #E9b000
+        
     }
 `
 
@@ -44,25 +56,34 @@ const Footer = () => {
           </Link>  
      
         <FooterLinks className="row">
-                    
+        <FooterMenuStyles className="footer__menu social__menu">
               
-                    <a href="https://www.youtube.com/c/mototrips">
-                        <StaticImage src="../img/social/logo-youtube.png" alt="Logo Youtube"/>
+                    <a
+                    href="https://www.youtube.com/c/mototrips"
+                    target="_blank"
+                    rel="nofollow noreferrer noopener"
+                    >
+                        <YouTube/>
                         
                     </a>
-                   
-                
-                
-                    <a href="https://www.facebook.com/MotoTripsPolska">
-                        <StaticImage   src="../img/social/logo-facebook.png" alt="Logo Facebook"/>
+
+                    <a
+                    href="https://www.facebook.com/MotoTripsPolska"
+                    target="_blank"
+                    rel="nofollow noreferrer noopener"
+                    >
+                        <Facebook/>
                     </a>
-                    
-           
-                    <a href="https://www.instagram.com/mototripspl/">
-                        <StaticImage  src="../img/social/logo-instagram.PNG" alt="Logo Instagram" />
+         
+                    <a
+                    href="https://www.instagram.com/mototripspl/"
+                    target="_blank"
+                    rel="nofollow noreferrer noopener"
+                    >
+                        <Instagram/>
                     </a>
                
-               
+        </FooterMenuStyles>
                 
             
         </FooterLinks>
