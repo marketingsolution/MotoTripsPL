@@ -1,7 +1,7 @@
 import React from "react";
-import Layout from "../../components/layout"
-import Breadcrumb from "../../components/Breadcrumb";
-import Seo from "../../components/seo";
+import Layout from "../components/layout"
+import Breadcrumb from "../components/Breadcrumb";
+import Seo from "../components/seo";
 import { Link, graphql } from "gatsby";
 import { GatsbyImage, getImage } from 'gatsby-plugin-image'
 

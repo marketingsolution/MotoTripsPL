@@ -140,7 +140,9 @@ const Header = () => {
                 <div>
                     <Link to="/moto-test/">Testy motocykli</Link>
                 </div>
-                
+                <div>
+                    <Link to="/sprzet/">Sprzęt</Link>
+                </div>
                 <div>
                     <Link to="/trasy-motocyklowe/">Trasy</Link>
                 </div>
