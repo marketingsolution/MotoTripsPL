@@ -2,7 +2,6 @@ import React from "react"
 import styled from "styled-components"
 import { Link } from 'gatsby'
 import { StaticImage } from "gatsby-plugin-image"
-import { FooterStyles, FooterMenuStyles, CopyrightStyles } from "./FooterStyles"
 
 import {
     FaFacebookSquare as Facebook,
@@ -16,14 +15,16 @@ const FooterLinks = styled.nav`
     flex-direction: row;
     flex-wrap: nowrap;
     justify-content: center;
-    
-   
+       
     a {
         margin: 10px;
         transition: color 0.3s ease;
         
         color: #E9b000
         
+    }
+    .footerIcon {
+      font-size: 2rem;
     }
 `
 
@@ -36,6 +37,7 @@ a {
 }
 
 `
+
 const Footer = () => {
   
    
@@ -50,20 +52,20 @@ const Footer = () => {
                 width={85}
                 layout="fixed"
                 alt="Logo Moto Trips"
-                src="../img/logo-kontra.png"
+                src="../../img/logo-kontra.png"
         
             />
           </Link>  
      
         <FooterLinks className="row">
-        <FooterMenuStyles className="footer__menu social__menu">
+      
               
                     <a
                     href="https://www.youtube.com/c/mototrips"
                     target="_blank"
                     rel="nofollow noreferrer noopener"
                     >
-                        <YouTube/>
+                        <YouTube className="footerIcon"/>
                         
                     </a>
 
@@ -72,7 +74,7 @@ const Footer = () => {
                     target="_blank"
                     rel="nofollow noreferrer noopener"
                     >
-                        <Facebook/>
+                        <Facebook className="footerIcon"/>
                     </a>
          
                     <a
@@ -80,10 +82,10 @@ const Footer = () => {
                     target="_blank"
                     rel="nofollow noreferrer noopener"
                     >
-                        <Instagram/>
+                        <Instagram className="footerIcon"/>
                     </a>
                
-        </FooterMenuStyles>
+   
                 
             
         </FooterLinks>

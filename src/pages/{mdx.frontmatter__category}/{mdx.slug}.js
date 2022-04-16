@@ -5,10 +5,14 @@ import Layout from '../../components/layout'
 import Breadcrumb from '../../components/Breadcrumb'
 import { GatsbyImage, getImage } from 'gatsby-plugin-image'
 import Seo from '../../components/seo'
+import YouTube from '../../components/youtube'
+
 
 
 const TripPost = ({ data }) => {
   const image = getImage(data.mdx.frontmatter.hero_image)
+  console.log(data.mdx.frontmatter.film)
+  
     return (
         <Layout>
           <Seo
@@ -61,6 +65,7 @@ const TripPost = ({ data }) => {
             <div className="row flex">
               <div className='left-column'>
                 <p className='lead'>{data.mdx.frontmatter.lead}</p>
+                <YouTube src={data.mdx.frontmatter.film} />
                 <MDXRenderer>
                     {data.mdx.body}
                 </MDXRenderer>
