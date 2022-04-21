@@ -7,6 +7,7 @@ import Seo from "../components/seo"
 import NewsPost from "../components/news-post-archive"
 import MotoTest from "../components/recomendetMotoTest"
 import YouTube from "../components/youtube"
+import parse from "html-react-parser"
 
 const Lead = styled.div`
   p {
@@ -125,6 +126,7 @@ function NewsView({ news }) {
             <div dangerouslySetInnerHTML={{ __html: news.paragraph1 }}></div>
 
             <div dangerouslySetInnerHTML={{ __html: news.paragraph2 }}></div>
+            
           </LeftColumn>
           <RightColumn>
             <MotoTest />

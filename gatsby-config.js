@@ -103,7 +103,7 @@ module.exports = {
       resolve: `gatsby-source-filesystem`,
       options: {
         name: `moto-test-mdx`,
-        path: `${__dirname}/moto-test`,
+        path: `${__dirname}/src/categories/moto-test`,
       },
     },
 
@@ -111,7 +111,7 @@ module.exports = {
       resolve: "gatsby-source-filesystem",
       options: {
         name: `news`,
-        path: `${__dirname}/news`,
+        path: `${__dirname}/src/categories/news`,
       }
     },
     {
@@ -126,7 +126,7 @@ module.exports = {
       resolve: `gatsby-source-filesystem`,
       options: {
         name: `porady-mdx`,
-        path: `${__dirname}/porady`,
+        path: `${__dirname}/src/categories/porady`,
       },
     },
 
@@ -134,7 +134,7 @@ module.exports = {
       resolve: `gatsby-source-filesystem`,
       options: {
         name: `sprzet`,
-        path: `${__dirname}/src/sprzet`,
+        path: `${__dirname}/src/categories/sprzet`,
       },
     },
 
@@ -150,7 +150,7 @@ module.exports = {
       resolve: `gatsby-source-filesystem`,
       options: {
         name: `trasy-motocyklowe`,
-        path: `${__dirname}/trasy-motocyklowe`,
+        path: `${__dirname}/src/categories/trasy-motocyklowe`,
       },
     },
 

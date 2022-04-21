@@ -41,6 +41,7 @@ export const query = graphql`
         }
         date
         modified
+       
         featuredImage {
           node {
             altText

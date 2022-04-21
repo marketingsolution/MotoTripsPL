@@ -1,61 +1,30 @@
 import { useStaticQuery, graphql } from "gatsby";
 
 export const PostQuery = () => {
-    const { allWpPost } = useStaticQuery(
+    const { allMdx } = useStaticQuery(
         graphql`
         query LastPost {
-          allWpPost(
-            
-            filter: {categories: {nodes: {elemMatch: {name: {ne: "Moto test"}}}}}
-            sort: {fields: [date], order: DESC}
-            limit: 1
-            ) {
-              nodes {
+          allMdx(sort: {fields: frontmatter___date, order: DESC}, filter: {frontmatter: {category: {eq: "News"}}},  limit: 1) {
+            nodes {
+              frontmatter {
+                date(formatString: "DD-MM-YYYY r.")
                 title
-                slug
-                uri
-                id
-                date(formatString: "MMMM DD, YYYY")
-                excerpt
-                categories {
-                  nodes {
-                    name
-                  }
-                }
-                tags {
-                  nodes {
-                    name
-                  }
-                }
-                author {
-                  node {
-                    name
-                    avatar {
-                      url
-                    }
-                  }
-                }
-                featuredImage {
-                  node {
-                    altText
-                    localFile {
-                      childImageSharp {
-                        gatsbyImageData(
-                          formats: [AUTO, WEBP, AVIF]
-                          )
-                        fluid(quality: 60) {
-                          src
-                        }
-                      }
-                    }
+                author
+                lead
+                category
+                hero_image_alt
+                hero_image {
+                  childImageSharp {
+                    gatsbyImageData
                   }
                 }
               }
+              id
+              slug
             }
           }
-          
-            
-        `
+    }
+    `
     )
-    return allWpPost.nodes
+    return allMdx.nodes
 }
