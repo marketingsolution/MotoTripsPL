@@ -10,6 +10,8 @@ require("dotenv").config({
   path: `.env.${process.env.NODE_ENV}`,
 })
 
+const Disqus_Shortname = process.env.GATSBY_DISQUS_NAME
+
 module.exports = {
   /**
    * Adding plugins to this array adds them to your Gatsby site.
@@ -204,7 +206,7 @@ module.exports = {
     {
       resolve: `gatsby-plugin-disqus`,
       options: {
-          shortname: `mototrips`
+          shortname: Disqus_Shortname
       }
   },
     {

@@ -6,12 +6,18 @@ import Breadcrumb from '../../components/Breadcrumb'
 import { GatsbyImage, getImage } from 'gatsby-plugin-image'
 import Seo from '../../components/seo'
 import YouTube from '../../components/youtube'
-
-
+import { Disqus } from 'gatsby-plugin-disqus';
 
 const TripPost = ({ data }) => {
   const image = getImage(data.mdx.frontmatter.hero_image)
-  console.log(data.mdx.frontmatter.film)
+  let disqusConfig = {
+    url: data.mdx.slug,
+    /* Replace PAGE_IDENTIFIER with your page's unique identifier variable */
+    identifier: data.mdx.id,
+    /* Replace PAGE_TITLE with the title of the page */
+    title: data.mdx.frontmatter.title,
+
+  }
   
     return (
         <Layout>
@@ -69,7 +75,9 @@ const TripPost = ({ data }) => {
                 <MDXRenderer>
                     {data.mdx.body}
                 </MDXRenderer>
+                <Disqus style={{paddingTop: "25px"}} config={disqusConfig}/>
               </div>
+              
            <div className='right-column'></div>
             </div>
         </Layout>
