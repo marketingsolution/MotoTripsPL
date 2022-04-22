@@ -10,8 +10,9 @@ import { Disqus } from 'gatsby-plugin-disqus';
 
 const TripPost = ({ data }) => {
   const image = getImage(data.mdx.frontmatter.hero_image)
+  console.log(`https://mototrips.pl/${data.mdx.frontmatter.category.replace(" ", "-").replace("ę", "e").toLowerCase()}/${data.mdx.slug}`)
   let disqusConfig = {
-    url: data.mdx.slug,
+    url: `https://mototrips.pl/${data.mdx.frontmatter.category.replace(" ", "-").replace("ę", "e").toLowerCase()}/${data.mdx.slug}`,
     /* Replace PAGE_IDENTIFIER with your page's unique identifier variable */
     identifier: data.mdx.id,
     /* Replace PAGE_TITLE with the title of the page */
@@ -64,7 +65,7 @@ const TripPost = ({ data }) => {
                 <h1>{data.mdx.frontmatter.title}</h1>
               </div>
             </div>    
-            <Breadcrumb title={data.mdx.frontmatter.title} path={`/${data.mdx.frontmatter.category.replace(" ", "-").toLowerCase()}`} pathName={data.mdx.frontmatter.category} />
+            <Breadcrumb title={data.mdx.frontmatter.title} path={`/${data.mdx.frontmatter.category.replace(" ", "-").replace("ę", "e").toLowerCase()}`} pathName={data.mdx.frontmatter.category} />
             
           
             
