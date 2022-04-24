@@ -1,0 +1,24 @@
+.container {
+  margin-bottom: 20px;
+  width: 300px;
+}
+.descContainer {
+  display: flex;
+  justify-content: space-between;
+}
+
+.descItem {
+  text-align: center;
+}
+
+.descItem > div:nth-child(1) {
+  font-size: 18px;
+  font-weight: 600;
+  margin-bottom: 3px;
+}
+
+.link {
+  display: flex;
+  justify-content: center;
+  margin-top: 20px;
+}
