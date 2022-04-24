@@ -11,6 +11,10 @@ require("dotenv").config({
 })
 
 const Disqus_Shortname = process.env.GATSBY_DISQUS_NAME
+const MySqlUser = process.env.MySqlUser
+const MySqlPassword = process.env.MySqlPassword
+const MySqlHost = process.env.MySqlHost
+const MySqlDatabase = process.env.MySqlDatabase
 
 module.exports = {
   /**
@@ -54,6 +58,32 @@ module.exports = {
         },
       },
     },
+    {
+      resolve: `gatsby-source-mysql`,
+      options: {
+        connectionDetails: {
+          host: MySqlHost,
+          user: MySqlUser,
+          password: MySqlPassword,
+          database: MySqlDatabase
+        },
+        queries: [
+          {
+            statement: "SELECT * FROM mototrip_details",
+            idFieldName: "id",
+            name: "bikes",
+          },
+          {
+            statement: "SELECT * FROM users",
+            // idFieldName: "id",
+            name: "users",
+          },
+        ],
+      },
+    },
+    { resolve: `gatsby-plugin-material-ui` },
+    { resolve: `gatsby-theme-material-ui` },
+    `gatsby-plugin-use-query-params`,
     `gatsby-plugin-sitemap`,
     /**
      * We need this plugin so that it adds the "File.publicURL" to our site
