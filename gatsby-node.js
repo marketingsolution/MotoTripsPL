@@ -118,7 +118,6 @@ exports.createPages = async ({ graphql, actions }) => {
 		
 	createRedirect({
     fromPath: `/trening/pkk-profil-kandydata-na-kierowce/`,
-    fromPath: `/tag/pkk/`,
     toPath: `/porady/pkk-profil-kandydata-na-kierowce-jak-wyrobic-pytania-i-odpowiedzi/`,
   });
 }
