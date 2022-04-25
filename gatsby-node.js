@@ -111,3 +111,14 @@ exports.sourceNodes = async ({
     console.log(err)
   }
 }
+
+// gatsby-node.js
+exports.createPages = async ({ graphql, actions }) => {
+	const { createRedirect } = actions;
+		
+	createRedirect({
+    fromPath: `/trening/pkk-profil-kandydata-na-kierowce/`,
+    fromPath: `/tag/pkk/`,
+    toPath: `/porady/pkk-profil-kandydata-na-kierowce-jak-wyrobic-pytania-i-odpowiedzi/`,
+  });
+}
