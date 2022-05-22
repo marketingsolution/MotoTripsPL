@@ -33,14 +33,14 @@
      title: title || defaultTitle,
      description: description || defaultDescription,
      image: image || defaultImage,
-     siteUrl: `${siteUrl}${pathname}`,
+     siteUrl: siteUrl,
      publisher: defaultPublisher,  
    }
  
    const schemaOrgWebPage = {
      '@context': 'http://schema.org',
      '@type': 'WebPage',
-     url: siteUrl,
+     url: `${siteUrl}/${url}`,
      headline,
      inLanguage: siteLanguage,
      mainEntityOfPage: siteUrl,

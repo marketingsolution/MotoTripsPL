@@ -66,7 +66,7 @@ exports.sourceNodes = async ({
     const news = getNodesByType("WpNews")
     const post = getNodesByType("WpPost")
     const mdx = getNodesByType("mdx")
-    const films = [...news, ...post].map(node => node.film)
+    const films = [...news, ...post, ...mdx].map(node => node.film)
     
 
     const videoIds = films.reduce((filmIds, film) => {

@@ -10,9 +10,9 @@ import { Disqus } from 'gatsby-plugin-disqus';
 
 const TripPost = ({ data }) => {
   const image = getImage(data.mdx.frontmatter.hero_image)
-  console.log(`https://mototrips.pl/${data.mdx.frontmatter.category.replace(" ", "-").replace("ę", "e").toLowerCase()}/${data.mdx.slug}`)
+  const slug = `/${data.mdx.frontmatter.category.replace(" ", "-").replace("ę", "e").toLowerCase()}/${data.mdx.slug}`
   let disqusConfig = {
-    url: `https://mototrips.pl/${data.mdx.frontmatter.category.replace(" ", "-").replace("ę", "e").toLowerCase()}/${data.mdx.slug}`,
+    url: `https://mototrips.pl${slug}`,
     /* Replace PAGE_IDENTIFIER with your page's unique identifier variable */
     identifier: data.mdx.id,
     /* Replace PAGE_TITLE with the title of the page */
@@ -25,8 +25,8 @@ const TripPost = ({ data }) => {
           <Seo
             title={data.mdx.frontmatter.title}
             description={data.mdx.frontmatter.lead} 
-            image={image}
-            pathname={data.mdx.frontmatter.slug}
+            image={data.mdx.frontmatter.hero_image}
+            url={slug}
             article
             date={data.mdx.frontmatter.date}
             modified={data.mdx.parent.modifiedTime}
@@ -96,6 +96,7 @@ query ($id: String) {
         author
         lead
         category
+        film
         hero_image_alt
         hero_image_credit_link
         hero_image_credit_text
