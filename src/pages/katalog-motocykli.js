@@ -171,7 +171,7 @@ export default function KatalogMotorcyckli({ data, location }) {
           alignItems: "center",
         }}
       >
-        <div>
+        {/* <div>
           <div>Filter by brand</div>
           <CustomeSelect
             data={bikeBrands.map(brand => ({ name: brand, id: brand }))}
@@ -180,9 +180,7 @@ export default function KatalogMotorcyckli({ data, location }) {
             name="brand"
             handleChange={handleChange}
           />
-          {/* <div>here</div> */}
           <Button
-            // color=""
             variant="contained"
             disabled={!brandName}
             title="filter"
@@ -194,7 +192,7 @@ export default function KatalogMotorcyckli({ data, location }) {
           >
             filter
           </Button>
-        </div>
+        </div> */}
         <div className={classes.container}>
           {list.map(el => {
             return <BikeCard key={el.node.id} data={el.node} />
