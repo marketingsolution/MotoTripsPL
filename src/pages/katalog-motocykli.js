@@ -8,8 +8,10 @@ import { useQueryParam, NumberParam, StringParam } from "use-query-params"
 import CustomeSelect from "../components/CustomeSelect"
 import { Button } from "gatsby-theme-material-ui"
 export default function KatalogMotorcyckli({ data, location }) {
-  console.log(data)
-  console.log(location)
+  // console.log(data)
+  // console.log(location)
+
+  const bikesPerPage = 24
   const [num, setNum] = useQueryParam("p", NumberParam)
   // const { title, description } = data.site.siteMetadata
   const [brandName, setBrandName] = useState("")
@@ -19,13 +21,18 @@ export default function KatalogMotorcyckli({ data, location }) {
   const [list, setList] = useState([...bikes.slice(0, 10)])
 
   // State to trigger oad more
+
   const [loadMore, setLoadMore] = useState(false)
 
   // State of whether there is more to load
   const [hasMore, setHasMore] = useState(bikes.length > 10)
 
+  const [isMore, setIsMore] = useState(false)
+
   //Set a ref for the loading div
   const loadRef = useRef()
+
+  const [currentPage, setCurrentPage] = useState(1)
 
   // Handle intersection with load more div
   const handleObserver = entities => {
@@ -34,37 +41,6 @@ export default function KatalogMotorcyckli({ data, location }) {
       setLoadMore(true)
     }
   }
-
-  //Initialize the intersection observer API
-  useEffect(() => {
-    var options = {
-      root: null,
-      rootMargin: "20px",
-      threshold: 1.0,
-    }
-    const observer = new IntersectionObserver(handleObserver, options)
-    if (loadRef.current) {
-      observer.observe(loadRef.current)
-    }
-  }, [])
-
-  // Handle loading more articles
-  useEffect(() => {
-    if (loadMore && hasMore) {
-      const currentLength = list.length
-      const isMore = currentLength < bikes.length
-      const nextResults = isMore
-        ? bikes.slice(currentLength, currentLength + 10)
-        : []
-
-      setList([...list, ...nextResults])
-      const len = list.length
-      console.log(len)
-      setLoadMore(false)
-      //   setNum(len / 10)
-      navigate(`/katalog-motocykli#?p=${len / 10}`)
-    }
-  }, [loadMore, hasMore]) //eslint-disable-line
 
   //Check if there is more
   useEffect(() => {
@@ -78,20 +54,23 @@ export default function KatalogMotorcyckli({ data, location }) {
 
   useEffect(() => {
     console.log({ location })
-    // const params = new URLSearchParams(location.hash);
+    const params = new URLSearchParams(location.hash)
     const param = location?.hash.split("=")[1]
-    console.log(
-      { param: Number(param) },
-      param,
-      bikes,
-      Number(param) && bikes.length
-    )
-    if (Number(param) && bikes.length) {
-      //   alert("if")
-      setList([...bikes.slice(0, Number(param) * 10)])
-    }
 
-    // console.log(params)
+    const paramNum = Number(param) ? Number(param) : 1
+    const sliceFrom = paramNum * bikesPerPage
+    console.log({ sliceFrom })
+
+    const sliceTo = sliceFrom + bikesPerPage
+    setIsMore(sliceFrom < bikes.length)
+    console.log({ sliceTo })
+    setList(bikes.slice(sliceFrom, sliceTo))
+    // setCurrentPage(paramNum)
+    if (!!paramNum) {
+      navigate(`/katalog-motocykli#?p=${paramNum}`)
+    } else {
+      navigate(`/katalog-motocykli`)
+    }
   }, [])
 
   //   console.log(getSearchParams())
@@ -104,14 +83,84 @@ export default function KatalogMotorcyckli({ data, location }) {
     if (bikes.length) {
       const brands = bikes.map(bike => bike.node.make)
       const uniqueBrands = [...new Set(brands)]
-      console.log({ uniqueBrands })
+      // console.log({ uniqueBrands })
       return uniqueBrands
     } else return []
   }, [bikes])
 
-  console.log({ brandName })
+  // console.log({ brandName })
 
-  console.log()
+  // console.log()
+
+  const handleNext = () => {
+    const params = new URLSearchParams(location.hash)
+    const param = location?.hash.split("=")[1]
+
+    const paramNum = Number(param) ? Number(param) + 1 : 2
+    console.log({ paramNum })
+    const sliceFrom = paramNum * bikesPerPage
+    console.log({ sliceFrom })
+
+    const sliceTo = sliceFrom + bikesPerPage
+    console.log({ sliceTo })
+
+    // console.log({ param: Number(param) }, param, bikes)
+    // const currentLength = list.length
+    const isMore = sliceFrom < bikes.length
+    setIsMore(isMore)
+    console.log({ isMore })
+
+    // if (isMore) {
+    console.log(sliceFrom, sliceTo)
+
+    setList(bikes.slice(sliceFrom, sliceTo))
+    // setCurrentPage(paramNum)
+    navigate(`/katalog-motocykli#?p=${paramNum}`)
+    // }
+  }
+
+  const handlePrev = () => {
+    const params = new URLSearchParams(location.hash)
+    const param = location?.hash.split("=")[1]
+
+    const paramNum = Number(param) ? Number(param) - 1 : 2
+    console.log({ paramNum })
+    const sliceFrom = paramNum * bikesPerPage
+    console.log({ sliceFrom })
+
+    const sliceTo = sliceFrom + bikesPerPage
+    console.log({ sliceTo })
+
+    // console.log({ param: Number(param) }, param, bikes)
+    // const currentLength = list.length
+    const isMore = sliceFrom < bikes.length
+    console.log({ isMore })
+    setIsMore(isMore)
+
+    if (isMore) {
+      // console.log(sliceFrom, sliceTo)
+
+      setList(bikes.slice(sliceFrom, sliceTo))
+      // setCurrentPage(paramNum)
+      // if (paramNum === 1) {
+      //   navigate(`/katalog-motocykli`)
+      // } else {
+      navigate(`/katalog-motocykli#?p=${paramNum}`)
+      // }
+    }
+  }
+
+  console.log({ length: bikes.length })
+
+  useEffect(() => {
+    const param = location?.hash.split("=")[1]
+
+    const paramNum = Number(param) ? Number(param) : 1
+
+    setCurrentPage(paramNum)
+  }, [location?.hash])
+
+  console.log(currentPage, bikesPerPage, bikes.length)
 
   return (
     <Layout>
@@ -151,9 +200,38 @@ export default function KatalogMotorcyckli({ data, location }) {
             return <BikeCard key={el.node.id} data={el.node} />
           })}
         </div>
-        <div ref={loadRef}>
-          {hasMore ? <p>Loading...</p> : <p>No more results</p>}
+
+        <div className={classes.footer}>
+          <div
+            style={currentPage <= 1 ? { color: "gray" } : { cursor: "pointer" }}
+            onClick={() => {
+              if (currentPage >= 2) {
+                handlePrev()
+              }
+            }}
+          >
+            Prev
+          </div>
+          <div style={{ borderRadius: "100%" }}>{currentPage}</div>
+          <div
+            style={
+              (currentPage + 1) * bikesPerPage < bikes.length - 1
+                ? { cursor: "pointer" }
+                : { color: "gray" }
+            }
+            onClick={() => {
+              if ((currentPage + 1) * bikesPerPage < bikes.length - 1) {
+                handleNext()
+              }
+            }}
+          >
+            Next
+          </div>
         </div>
+
+        {/* <div ref={loadRef}>
+          {hasMore ? <p>Loading...</p> : <p>No more results</p>}
+        </div> */}
       </div>
     </Layout>
   )

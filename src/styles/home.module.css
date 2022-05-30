@@ -5,3 +5,20 @@
   flex-wrap: wrap;
   justify-content: space-around;
 }
+
+
+.footer {
+  margin-left: auto;
+    margin-right: 10%;
+    display: flex;
+    margin-bottom: 30px;
+}
+
+.footer > div {
+  margin-left: 10px;
+  border: 2px solid gray;
+  margin-left: 10px;
+    border: 2px solid gray;
+    padding: 10px 20px;
+    color: blue;
+}
