@@ -3,13 +3,19 @@
  *
  * See: https://www.gatsbyjs.com/docs/gatsby-config/
  */
+ require("dotenv").config({
+  path: `.env.${process.env.NODE_ENV}`,
+})
+
+const MySqlUser = process.env.MySqlUser
+const MySqlPassword = process.env.MySqlPassword
+const MySqlHost = process.env.MySqlHost
+const MySqlDatabase = process.env.MySqlDatabase
 
 module.exports = {
   /* Your site config here */
   plugins: [
-    { resolve: `gatsby-plugin-material-ui` },
-    { resolve: `gatsby-theme-material-ui` },
-
+  
     {
       resolve: `gatsby-source-filesystem`,
       options: {
@@ -28,10 +34,10 @@ module.exports = {
       resolve: `gatsby-source-mysql`,
       options: {
         connectionDetails: {
-          host: "localhost",
-          user: "user1",
-          password: "123456789",
-          database: "mototrip_db",
+          host: MySqlHost,
+          user: MySqlUser,
+          password: MySqlPassword,
+          database: MySqlDatabase
         },
         queries: [
           {
