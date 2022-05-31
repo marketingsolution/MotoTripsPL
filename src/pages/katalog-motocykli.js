@@ -7,6 +7,8 @@ import * as classes from "../styles/home.module.css"
 import { useQueryParam, NumberParam, StringParam } from "use-query-params"
 import CustomeSelect from "../components/CustomeSelect"
 import { Button } from "gatsby-theme-material-ui"
+import RangeSlider from "../components/RangeSlider"
+
 export default function KatalogMotorcyckli({ data, location }) {
   // console.log(data)
   // console.log(location)
@@ -17,6 +19,7 @@ export default function KatalogMotorcyckli({ data, location }) {
   const [brandName, setBrandName] = useState("")
 
   const bikes = data.allMysqlBikes.edges
+  const [bikesToRender, setBikesToRender] = useState(bikes)
   // State for the list
   const [list, setList] = useState([...bikes.slice(0, 10)])
 
@@ -160,7 +163,28 @@ export default function KatalogMotorcyckli({ data, location }) {
     setCurrentPage(paramNum)
   }, [location?.hash])
 
-  console.log(currentPage, bikesPerPage, bikes.length)
+  console.log(bikes)
+
+  const bikesRPM = bikes
+    .map(el => Number(el?.node?.power_rpm))
+    .filter(el => !!el)
+  const bikesPS = bikes.map(el => Number(el?.node?.power_ps)).filter(el => !!el)
+
+  console.log({ bikesRPM, bikesPS })
+
+  const minRPMDefault = Math.min(...bikesRPM)
+  const maxRPMDefault = Math.max(...bikesRPM)
+  const minPSDefault = Math.min(...bikesPS)
+  const maxPSDefault = Math.max(...bikesPS)
+
+  const [minRPM, setMinRPM] = useState(Math.min(...bikesRPM))
+  const [maxRPM, setMaxRPM] = useState(Math.max(...bikesRPM))
+  const [minPS, setMinPS] = useState(Math.min(...bikesPS))
+  const [maxPS, setMaxPS] = useState(Math.max(...bikesPS))
+
+  console.log({ minRPM, maxRPM, minPS, maxPS })
+
+  const handleFilter = () => {}
 
   return (
     <Layout>
@@ -171,6 +195,42 @@ export default function KatalogMotorcyckli({ data, location }) {
           alignItems: "center",
         }}
       >
+        <div
+          style={{
+            border: "2px solid red",
+            width: "90%",
+            display: "flex",
+            justifyContent: "space-around",
+            marginBottom: "30px",
+          }}
+        >
+          <RangeSlider
+            title="Power RPM"
+            minD={minRPMDefault}
+            maxD={maxRPMDefault}
+            min={minRPM}
+            setMin={setMinRPM}
+            max={maxRPM}
+            setMax={setMaxRPM}
+          />
+          <RangeSlider
+            title="Power PS"
+            minD={minPSDefault}
+            maxD={maxPSDefault}
+            min={minPS}
+            setMin={setMinPS}
+            max={maxPS}
+            setMax={setMaxPS}
+          />
+          <Button
+            variant="contained"
+            // disabled={}
+            title="filter"
+            onClick={handleFilter}
+          >
+            filter
+          </Button>
+        </div>
         {/* <div>
           <div>Filter by brand</div>
           <CustomeSelect
