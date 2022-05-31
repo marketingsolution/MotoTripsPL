@@ -3,17 +3,17 @@ import MultiRangeSlider from "multi-range-slider-react"
 function RangeSlider({ minD, maxD, min, setMin, max, setMax, title }) {
   const [minValue, set_minValue] = useState(25)
   const [maxValue, set_maxValue] = useState(75)
+
   const handleInput = e => {
     setMin(e.minValue)
     setMax(e.maxValue)
   }
 
+  console.log({ maxD, minD })
+
   return (
-    <div
-      style={{ border: "2px solid red", width: "300px" }}
-      className="RangeSlider"
-    >
-      <div>{title}</div>
+    <div style={{ width: "300px" }} className="RangeSlider">
+      <div style={{ textAlign: "center" }}>{title}</div>
       <MultiRangeSlider
         min={minD}
         max={maxD}
@@ -27,7 +27,7 @@ function RangeSlider({ minD, maxD, min, setMin, max, setMax, title }) {
           handleInput(e)
         }}
       />
-      <div>{`${min}-${max}`}</div>
+      <div style={{ textAlign: "center" }}>{`${min}-${max}`}</div>
     </div>
   )
 }

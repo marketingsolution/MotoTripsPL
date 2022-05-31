@@ -21,14 +21,14 @@ export default function KatalogMotorcyckli({ data, location }) {
   const bikes = data.allMysqlBikes.edges
   const [bikesToRender, setBikesToRender] = useState(bikes)
   // State for the list
-  const [list, setList] = useState([...bikes.slice(0, 10)])
+  const [list, setList] = useState([...bikesToRender.slice(0, 10)])
 
   // State to trigger oad more
 
   const [loadMore, setLoadMore] = useState(false)
 
   // State of whether there is more to load
-  const [hasMore, setHasMore] = useState(bikes.length > 10)
+  const [hasMore, setHasMore] = useState(bikesToRender.length > 10)
 
   const [isMore, setIsMore] = useState(false)
 
@@ -47,7 +47,7 @@ export default function KatalogMotorcyckli({ data, location }) {
 
   //Check if there is more
   useEffect(() => {
-    const isMore = list.length < bikes.length
+    const isMore = list.length < bikesToRender.length
     setHasMore(isMore)
   }, [list]) //eslint-disable-line
 
@@ -65,9 +65,9 @@ export default function KatalogMotorcyckli({ data, location }) {
     console.log({ sliceFrom })
 
     const sliceTo = sliceFrom + bikesPerPage
-    setIsMore(sliceFrom < bikes.length)
+    setIsMore(sliceFrom < bikesToRender.length)
     console.log({ sliceTo })
-    setList(bikes.slice(sliceFrom, sliceTo))
+    setList(bikesToRender.slice(sliceFrom, sliceTo))
     // setCurrentPage(paramNum)
     if (!!paramNum) {
       navigate(`/katalog-motocykli#?p=${paramNum}`)
@@ -83,13 +83,13 @@ export default function KatalogMotorcyckli({ data, location }) {
   }
 
   const bikeBrands = useMemo(() => {
-    if (bikes.length) {
-      const brands = bikes.map(bike => bike.node.make)
+    if (bikesToRender.length) {
+      const brands = bikesToRender.map(bike => bike.node.make)
       const uniqueBrands = [...new Set(brands)]
       // console.log({ uniqueBrands })
       return uniqueBrands
     } else return []
-  }, [bikes])
+  }, [bikesToRender])
 
   // console.log({ brandName })
 
@@ -107,16 +107,16 @@ export default function KatalogMotorcyckli({ data, location }) {
     const sliceTo = sliceFrom + bikesPerPage
     console.log({ sliceTo })
 
-    // console.log({ param: Number(param) }, param, bikes)
+    // console.log({ param: Number(param) }, param, bikesToRender)
     // const currentLength = list.length
-    const isMore = sliceFrom < bikes.length
+    const isMore = sliceFrom < bikesToRender.length
     setIsMore(isMore)
     console.log({ isMore })
 
     // if (isMore) {
     console.log(sliceFrom, sliceTo)
 
-    setList(bikes.slice(sliceFrom, sliceTo))
+    setList(bikesToRender.slice(sliceFrom, sliceTo))
     // setCurrentPage(paramNum)
     navigate(`/katalog-motocykli#?p=${paramNum}`)
     // }
@@ -134,16 +134,16 @@ export default function KatalogMotorcyckli({ data, location }) {
     const sliceTo = sliceFrom + bikesPerPage
     console.log({ sliceTo })
 
-    // console.log({ param: Number(param) }, param, bikes)
+    // console.log({ param: Number(param) }, param, bikesToRender)
     // const currentLength = list.length
-    const isMore = sliceFrom < bikes.length
+    const isMore = sliceFrom < bikesToRender.length
     console.log({ isMore })
     setIsMore(isMore)
 
     if (isMore) {
       // console.log(sliceFrom, sliceTo)
 
-      setList(bikes.slice(sliceFrom, sliceTo))
+      setList(bikesToRender.slice(sliceFrom, sliceTo))
       // setCurrentPage(paramNum)
       // if (paramNum === 1) {
       //   navigate(`/katalog-motocykli`)
@@ -153,7 +153,7 @@ export default function KatalogMotorcyckli({ data, location }) {
     }
   }
 
-  console.log({ length: bikes.length })
+  console.log({ length: bikesToRender.length })
 
   useEffect(() => {
     const param = location?.hash.split("=")[1]
@@ -163,28 +163,61 @@ export default function KatalogMotorcyckli({ data, location }) {
     setCurrentPage(paramNum)
   }, [location?.hash])
 
-  console.log(bikes)
+  console.log(bikesToRender)
 
-  const bikesRPM = bikes
-    .map(el => Number(el?.node?.power_rpm))
-    .filter(el => !!el)
-  const bikesPS = bikes.map(el => Number(el?.node?.power_ps)).filter(el => !!el)
+  const [minRPM, setMinRPM] = useState(0)
+  const [maxRPM, setMaxRPM] = useState(0)
+  const [minPS, setMinPS] = useState(0)
+  const [maxPS, setMaxPS] = useState(0)
 
-  console.log({ bikesRPM, bikesPS })
+  const [minRPMDefault, setMinRPMDefault] = useState(0)
+  const [maxRPMDefault, setMaxRPMDefault] = useState(0)
+  const [minPSDefault, setMinPSDefault] = useState(0)
+  const [maxPSDefault, setMaxPSDefault] = useState(0)
+  useEffect(() => {
+    const bikesRPM = bikesToRender
+      .map(el => Number(el?.node?.power_rpm))
+      .filter(el => !!el)
+    const bikesPS = bikesToRender
+      .map(el => Number(el?.node?.power_ps))
+      .filter(el => !!el)
 
-  const minRPMDefault = Math.min(...bikesRPM)
-  const maxRPMDefault = Math.max(...bikesRPM)
-  const minPSDefault = Math.min(...bikesPS)
-  const maxPSDefault = Math.max(...bikesPS)
+    setMinRPM(Math.min(...bikesRPM))
+    setMaxRPM(Math.max(...bikesRPM))
+    setMinPS(Math.min(...bikesPS))
+    setMaxPS(Math.max(...bikesPS))
 
-  const [minRPM, setMinRPM] = useState(Math.min(...bikesRPM))
-  const [maxRPM, setMaxRPM] = useState(Math.max(...bikesRPM))
-  const [minPS, setMinPS] = useState(Math.min(...bikesPS))
-  const [maxPS, setMaxPS] = useState(Math.max(...bikesPS))
+    setMinRPMDefault(Math.min(...bikesRPM))
+    setMaxRPMDefault(Math.max(...bikesRPM))
+    setMinPSDefault(Math.min(...bikesPS))
+    setMaxPSDefault(Math.max(...bikesPS))
+
+    console.log({ bikesRPM, bikesPS })
+  }, [])
 
   console.log({ minRPM, maxRPM, minPS, maxPS })
 
-  const handleFilter = () => {}
+  const handleFilter = () => {
+    const filterd = bikes.filter(el => {
+      const { power_ps, power_rpm } = el.node
+      const numPS = Number(power_ps)
+      const numRPM = Number(power_rpm)
+      if (!numPS || !numRPM) return false
+
+      const inPSRange = numPS >= minPS && numPS <= maxPS
+      const inRPMRange = numRPM >= minRPM && numRPM <= maxRPM
+
+      return !!(inPSRange && inRPMRange)
+    })
+    console.log({ filterd })
+
+    setBikesToRender(filterd)
+    setList(filterd.slice(0, bikesPerPage))
+    setCurrentPage(1)
+    navigate(`/katalog-motocykli#?p=1`)
+
+    console.log({ filterd })
+  }
 
   return (
     <Layout>
@@ -197,10 +230,10 @@ export default function KatalogMotorcyckli({ data, location }) {
       >
         <div
           style={{
-            border: "2px solid red",
             width: "90%",
             display: "flex",
             justifyContent: "space-around",
+            alignItems: "center",
             marginBottom: "30px",
           }}
         >
@@ -273,12 +306,12 @@ export default function KatalogMotorcyckli({ data, location }) {
           <div style={{ borderRadius: "100%" }}>{currentPage}</div>
           <div
             style={
-              (currentPage + 1) * bikesPerPage < bikes.length - 1
+              (currentPage + 1) * bikesPerPage < bikesToRender.length - 1
                 ? { cursor: "pointer" }
                 : { color: "gray" }
             }
             onClick={() => {
-              if ((currentPage + 1) * bikesPerPage < bikes.length - 1) {
+              if ((currentPage + 1) * bikesPerPage < bikesToRender.length - 1) {
                 handleNext()
               }
             }}
