@@ -61,7 +61,7 @@ export default function KatalogMotorcyckli({ data, location }) {
     const param = location?.hash.split("=")[1]
 
     const paramNum = Number(param) ? Number(param) : 1
-    const sliceFrom = paramNum * bikesPerPage
+    const sliceFrom = (paramNum - 1) * bikesPerPage
     console.log({ sliceFrom })
 
     const sliceTo = sliceFrom + bikesPerPage
@@ -219,6 +219,59 @@ export default function KatalogMotorcyckli({ data, location }) {
     console.log({ filterd })
   }
 
+  const handleLast = () => {
+    const sliceTo = bikesToRender.length
+    const sliceFrom = sliceTo - bikesPerPage
+    const bikes = bikesToRender.slice(sliceFrom, sliceTo)
+    setList(bikes)
+    const pageNum = Math.floor(bikesToRender.length / bikesPerPage)
+    navigate(`/katalog-motocykli#?p=${pageNum}`)
+  }
+
+  const canClickLast = useMemo(() => {
+    if (bikesToRender.length && list.length) {
+      console.log("if")
+      const lastBikesToRenderItem = bikesToRender[bikesToRender.length - 1]
+      const lastListItem = list[list.length - 1]
+      const areSame = lastBikesToRenderItem.node.id === lastListItem.node.id
+
+      console.log({
+        areSame,
+        lastBikesToRenderItem: lastBikesToRenderItem,
+        lastListItem: lastListItem,
+      })
+
+      return !areSame
+    }
+
+    return false
+  }, [bikesToRender, list])
+
+  const handleFirst = () => {
+    // const sliceTo = bikesToRender.length
+    // const sliceFrom = sliceTo - bikesPerPage
+    const bikes = bikesToRender.slice(0, bikesPerPage)
+    setList(bikes)
+    navigate(`/katalog-motocykli#?p=1`)
+  }
+
+  const canClickFirst = useMemo(() => {
+    if (bikesToRender.length && list.length) {
+      const firstBike = bikesToRender[0]
+      const firstList = list[0]
+      const areSame = firstBike.node.id === firstList.node.id
+      console.log({ firstBike, firstList, areSame })
+      console.log(currentPage)
+      return !areSame
+    }
+
+    return false
+  }, [bikesToRender, list, currentPage])
+
+  useEffect(() => {
+    console.log({ list })
+  }, [list])
+
   return (
     <Layout>
       <div
@@ -294,6 +347,16 @@ export default function KatalogMotorcyckli({ data, location }) {
 
         <div className={classes.footer}>
           <div
+            style={!canClickFirst ? { color: "gray" } : { cursor: "pointer" }}
+            onClick={() => {
+              if (canClickFirst) {
+                handleFirst()
+              }
+            }}
+          >
+            First Page
+          </div>
+          <div
             style={currentPage <= 1 ? { color: "gray" } : { cursor: "pointer" }}
             onClick={() => {
               if (currentPage >= 2) {
@@ -317,6 +380,16 @@ export default function KatalogMotorcyckli({ data, location }) {
             }}
           >
             Next
+          </div>
+          <div
+            style={canClickLast ? { cursor: "pointer" } : { color: "gray" }}
+            onClick={() => {
+              if (canClickLast) {
+                handleLast()
+              }
+            }}
+          >
+            last Page
           </div>
         </div>
 
