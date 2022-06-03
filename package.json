@@ -10,7 +10,7 @@
   "dependencies": {
     "@fontsource/finger-paint": "^4.5.0",
     "@fontsource/lato": "^4.5.0",
-    "@fontsource/montserrat": "^4.5.1",
+    "@fontsource/montserrat": "^4.5.10",
     "acorn-import-assertions": "^1.8.0",
     "babel-plugin-styled-components": "^1.13.2",
     "cssnano": "^5.0.8",

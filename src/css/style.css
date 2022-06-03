@@ -54,7 +54,7 @@
   --fontSize-6: 2.488rem;
   --fontSize-7: 2.986rem;
   --color-primary: #005b99;
-  --color-text: #2e353f;
+  --color-text: #b1b8bf;
   --color-text-light: #4f5969;
   --color-heading: #1a202c;
   --color-heading-black: black;
@@ -152,7 +152,7 @@ p {
   padding: var(--spacing-0);
   color:#b1b8bf;
   font-size: 18px;
-  font-family: Lato;
+  font-family: Montserrat;
   font-weight: 300;
 }
 
@@ -191,9 +191,10 @@ blockquote {
   margin-left: calc(-1 * var(--spacing-6));
   margin-right: var(--spacing-8);
   padding: var(--spacing-0) var(--spacing-0) var(--spacing-0) var(--spacing-6);
-  border-left: var(--spacing-1) solid var(--color-primary);
+  border-left: var(--spacing-1) solid var(--color-accent);
   font-size: var(--fontSize-2);
   font-style: italic;
+  font-weight: 300;
   margin-bottom: var(--spacing-8);
 }
 
@@ -213,8 +214,15 @@ table {
   border-spacing: 0.25rem;
 }
 
-table thead tr th {
+table thead tr {
   border-bottom: 1px solid var(--color-accent);
+  
+}
+th {
+  color: var(--color-accent)
+}
+td {
+  padding: 20px;
 }
 
 /* Link */
