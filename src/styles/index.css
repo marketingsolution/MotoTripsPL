@@ -1,0 +1,14 @@
+.multi-range-slider-black {
+    /* background-color: red !important; */
+    box-shadow: 2px 5px 26px 1px rgba(0,0,0,0.75);
+    /* background-color: #e9b000; */
+  }
+
+  .multi-range-slider-black .bar-inner {
+      background-color: #e9b000 !important;
+  }
+
+  .multi-range-slider-black .thumb::before {
+    width: 30px !important;
+    border-radius: 100% !important;
+  }

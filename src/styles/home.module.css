@@ -22,3 +22,19 @@
     padding: 10px 20px;
     color: blue;
 }
+
+.rangeSilderContainer {
+  /* border: 2px solid red; */
+}
+
+.rangeSilderContainer > .multi-range-slider {
+  box-shadow: none !important;
+
+}
+
+
+
+.range  {
+  /* background-color: red; */
+  /* border: 2px solid red; */
+}

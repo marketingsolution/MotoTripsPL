@@ -8,6 +8,7 @@ import { useQueryParam, NumberParam, StringParam } from "use-query-params"
 import CustomeSelect from "../components/CustomeSelect"
 import { Button } from "gatsby-theme-material-ui"
 import RangeSlider from "../components/RangeSlider"
+import "../styles/index.css"
 
 export default function KatalogMotorcyckli({ data, location }) {
   // console.log(data)
@@ -22,6 +23,8 @@ export default function KatalogMotorcyckli({ data, location }) {
   const [bikesToRender, setBikesToRender] = useState(bikes)
   // State for the list
   const [list, setList] = useState([...bikesToRender.slice(0, 10)])
+
+  const [brands, setBrands] = useState([])
 
   // State to trigger oad more
 
@@ -44,6 +47,22 @@ export default function KatalogMotorcyckli({ data, location }) {
       setLoadMore(true)
     }
   }
+
+  useEffect(() => {
+    console.log({ bikes })
+    // alert("here")
+    if (bikes.length) {
+      const brands = []
+      bikes.forEach(bike => {
+        const exits = brands.includes(bike.node.make)
+        if (!exits) {
+          brands.push(bike.node.make)
+        }
+      })
+      setBrands(brands)
+      console.log("here////////////////////////////", { brands })
+    }
+  }, [])
 
   //Check if there is more
   useEffect(() => {
@@ -272,8 +291,38 @@ export default function KatalogMotorcyckli({ data, location }) {
     console.log({ list })
   }, [list])
 
+  const handleBrandClick = brand => {
+    // alert(brand)
+    const filterd = bikesToRender.filter(bike => bike.node.make === brand)
+    setList(filterd)
+  }
+
   return (
     <Layout>
+      <div
+        style={{
+          // border: "2px solid red",
+          width: "80%",
+          margin: "auto",
+          display: "flex",
+          justifyContent: "space-between",
+          marginBottom: "30px",
+        }}
+      >
+        {brands.map(el => (
+          <div
+            style={{
+              border: "2px solid black",
+              padding: 50,
+              borderRadius: "100%",
+              cursor: "pointer",
+            }}
+            onClick={() => handleBrandClick(el)}
+          >
+            {el}
+          </div>
+        ))}
+      </div>
       <div
         style={{
           display: "flex",
@@ -317,6 +366,7 @@ export default function KatalogMotorcyckli({ data, location }) {
             filter
           </Button>
         </div>
+
         {/* <div>
           <div>Filter by brand</div>
           <CustomeSelect
@@ -339,10 +389,15 @@ export default function KatalogMotorcyckli({ data, location }) {
             filter
           </Button>
         </div> */}
+
         <div className={classes.container}>
-          {list.map(el => {
-            return <BikeCard key={el.node.id} data={el.node} />
-          })}
+          {list.length ? (
+            list.map(el => {
+              return <BikeCard key={el.node.id} data={el.node} />
+            })
+          ) : (
+            <h2>No Data Found</h2>
+          )}
         </div>
 
         <div className={classes.footer}>
