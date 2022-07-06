@@ -19,7 +19,7 @@ const News = ({ data }) => {
         {
             data.allMdx.nodes.map((node) => (
              
-                <article key={node.id}>
+                <article className="card" key={node.id}>
                   <Link to={`/${node.frontmatter.category.toLowerCase()}/${node.slug}`}>
                   <div className="featured-news">
                   

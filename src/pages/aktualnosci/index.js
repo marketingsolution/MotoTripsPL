@@ -5,8 +5,8 @@ import FeaturedNews from '../../components/featured-news'
 import { Link, graphql } from "gatsby";
 import Seo from "../../components/seo";
 import { GatsbyImage, getImage } from 'gatsby-plugin-image'
-
 import OldNews from '../../components/old-news-archive'
+
 const Aktualnosci = ({ data }) => {
   return (
     <Layout>
@@ -25,7 +25,7 @@ const Aktualnosci = ({ data }) => {
         {
             data.allMdx.nodes.map((node) => (
              
-                <article key={node.id}>
+                <article className="card" key={node.id}>
                   <Link to={`/news/${node.slug}`}>
                   <div className="featured-news">
                   

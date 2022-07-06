@@ -78,6 +78,10 @@
   margin: 0 10px;
   max-width: 400px;
 }
+.featured-news h2 {
+  font-size: 1.4rem;
+  margin: 0 auto;
+}
 
 .featured-news h3 {
   margin: 0 auto;

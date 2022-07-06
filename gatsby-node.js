@@ -120,4 +120,12 @@ exports.createPages = async ({ graphql, actions }) => {
     fromPath: `/trening/pkk-profil-kandydata-na-kierowce/`,
     toPath: `/porady/pkk-profil-kandydata-na-kierowce-jak-wyrobic-pytania-i-odpowiedzi/`,
   });
+  createRedirect({
+    fromPath: `/news/dokumenty-potrzebne-do-rejestracji-motocykla-z-zagranicy/`,
+    toPath: `/porady/dokumenty-potrzebne-do-rejestracji-motocykla-z-zagranicy/`,
+  });
+  createRedirect({
+    fromPath: `/aktualnosci/jak-przerejestrowac-motocykl-szybko-i-bez-komplikacji/`,
+    toPath: `/porady/jak-przerejestrowac-motocykl-szybko-i-bez-komplikacji/`,
+  });
 }

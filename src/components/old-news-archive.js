@@ -3,9 +3,6 @@ import { Link } from "gatsby"
 import { OldNewsQuery } from "../hooks/old-news-query";
 import { GatsbyImage, getImage } from "gatsby-plugin-image"
 
-
-
-
 const OldNewsList = () => {
     
 

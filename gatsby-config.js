@@ -233,16 +233,6 @@ module.exports = {
     // `gatsby-plugin-offline`,
     `gatsby-plugin-styled-components`,
     {
-      resolve: `gatsby-plugin-google-analytics`,
-      options: {
-        // The property ID; the tracking code won't be generated without it
-        trackingId: "UA-114936908-1",
-        // Defines where to place the tracking script - `true` in the head and `false` in the body
-        head: true,
-        enableWebVitalsTracking: true,
-      },
-    },
-    {
       resolve: "gatsby-plugin-google-tagmanager",
       options: {
         id: "GTM-T3Z5ZR7",
