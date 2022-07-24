@@ -63,7 +63,7 @@ const MenuLinks = styled.nav`
 
     div {
         margin: 0px;
-        width: 100%;
+        width: 1080px;
     }
 }
     
@@ -120,19 +120,23 @@ const Header = () => {
             <div />
             <div />
         </MenuIcon>
+        <div className="row flex">
         <Link to="/">
-           <StaticImage
-                className="row"
+            
+           <StaticImage to="/"
+                
                 width={120}
+                height={120}
                 layout="fixed"
                 alt="Logo Moto Trips"
                 src="../img/logo-kontra.png"
         
             />
+           
             </Link>
-      
+            </div>
 
-        <MenuLinks nav={nav} className="row">
+        <MenuLinks nav={nav}>
                     
                 <div>
                     <Link to="/aktualnosci/">Aktualności</Link>

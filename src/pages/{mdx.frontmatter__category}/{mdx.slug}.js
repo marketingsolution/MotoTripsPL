@@ -18,13 +18,13 @@ const TripPost = ({ data }) => {
     title: data.mdx.frontmatter.title,
 
   }
-  
+ 
     return (
         <Layout>
           <Seo
             title={data.mdx.frontmatter.title}
             description={data.mdx.frontmatter.lead} 
-            image={data.mdx.frontmatter.hero_image}
+            image={data.mdx.frontmatter.hero_image.childImageSharp.gatsbyImageData.images.fallback.src}
             url={slug}
             article
             date={data.mdx.frontmatter.date}
@@ -40,13 +40,11 @@ const TripPost = ({ data }) => {
                 style={{
                   gridArea: "1/1",
                   // You can set a maximum height for the image, if you wish.
-                  maxHeight: 500,
                   
                 }}
                   image={image}
                   alt={data.mdx.frontmatter.hero_image_alt}
                   formats={["auto", "webp", "avif"]}
-                  aspectRatio={3 / 1}
                   layout="fullWidth"
                 />
              <div className="layer"
@@ -101,7 +99,10 @@ query ($id: String) {
         hero_image_credit_text
         hero_image {
           childImageSharp {
-            gatsbyImageData
+            gatsbyImageData(
+            width: 1920
+            height: 650
+            )
           }
         }
         date(formatString: "MMMM D, YYYY")
