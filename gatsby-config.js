@@ -155,7 +155,13 @@ module.exports = {
         path: `${__dirname}/src/categories/trasy-motocyklowe`,
       },
     },
-
+    {
+      resolve: `gatsby-source-filesystem`,
+      options: {
+        name: `trasy-motocyklowe-mdx`,
+        path: `${__dirname}/src/pages/trasy-motocyklowe`,
+      },
+    },
 
     /**
      * The following two plugins are required if you want to use Gatsby image
@@ -170,9 +176,6 @@ module.exports = {
             resolve: `gatsby-remark-images`,
             options: {
               maxWidth: 1080,
-              defaultLayouts: {
-                default: require.resolve("./src/components/layout.js"),
-              },
             },
           },
         ],

@@ -10,8 +10,8 @@ const NewsList = () => {
   
   return (
     
-    NewsQuery().map((nodes, key) => {
-      const image = getImage(nodes.featuredImage.node.localFile)
+    NewsQuery().map((nodes) => {
+      const image = getImage(nodes.featuredImage.node.localFile.childImageSharp.gatsbyImageData)
       
        
           return (

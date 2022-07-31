@@ -6,10 +6,6 @@ import Footer from './Footer/footer'
 import "@fontsource/finger-paint"
 import "@fontsource/lato"
 import "@fontsource/montserrat"
-import YouTube from './youtube'
-
-const shortcodes = { YouTube }
-
 
 const Layout = ({ isHomePage, children }) => {
  useStaticQuery(graphql`
@@ -28,7 +24,7 @@ const Layout = ({ isHomePage, children }) => {
     <Header />
 
       <main>
-        <MDXProvider components={shortcodes}>{children}</MDXProvider>
+        <MDXProvider>{children}</MDXProvider>
       </main>
 
     <Footer />

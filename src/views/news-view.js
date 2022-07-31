@@ -8,6 +8,7 @@ import NewsPost from "../components/news-post-archive"
 import MotoTest from "../components/recomendetMotoTest"
 import YouTube from "../components/youtube"
 import parse from "html-react-parser"
+import NewsList from "../components/news-post-archive"
 
 const Lead = styled.div`
   p {
@@ -63,7 +64,7 @@ function NewsView({ news }) {
     <Layout>
       <Seo
         title={news.title}
-        description={news.excerpt}
+        description={news.lead}
         image={news.featuredImage.node.localFile.url}
         pathname={news.slug}
         article

@@ -38,8 +38,11 @@ export const PostQuery = () => {
           altText
           localFile {
             childImageSharp {
-              gatsbyImageData(formats: [AUTO, WEBP, AVIF])
-              gatsbyImageData(quality: 60, placeholder: BLURRED, layout: FULL_WIDTH)
+              gatsbyImageData(formats: [AUTO, WEBP, AVIF],
+                quality: 60,
+                placeholder: BLURRED,
+                layout: FULL_WIDTH)
+             
             }
           }
         }

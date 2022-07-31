@@ -16,8 +16,10 @@ export const NewsQuery = () => {
           altText
           localFile {
             childImageSharp {
-              gatsbyImageData(formats: [AUTO, WEBP, AVIF])
-              gatsbyImageData(placeholder: BLURRED, layout: FULL_WIDTH)
+              gatsbyImageData(formats: [AUTO, WEBP, AVIF],
+                placeholder: BLURRED,
+                layout: FULL_WIDTH)
+              
             }
           }
         }
